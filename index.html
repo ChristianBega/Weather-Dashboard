@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Home Work #6</title>
+  </head>
+  <body>
+    <header class="container-fluid text-center text-white bg-dark p-3">
+      <h1>Weather Dashboard</h1>
+    </header>
+    <main class="container-fluid">
+      <div class="row">
+        <aside class="col-lg-3">
+          <h2>Search for a City:</h2>
+          <form id="form-submit">
+            <div class="mb-3">
+              <input type="text" class="form-control" id="user-input" aria-describedby="userInput" />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          <div>
+            <button class="test-btn p-3 btn btn-primary mt-3"></button>
+          </div>
+        </aside>
+
+        <section class="col-lg-9 results-section" id="current-forecast"></section>
+        <section id="test">
+          <div class="card">
+            <div class="card-body">
+              <p id="date1"></p>
+              <p id="icon1"></p>
+              <p id="temp1"></p>
+              <p id="wind1"></p>
+              <p id="humidity1"></p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <p id="date9"></p>
+              <p id="icon9"></p>
+              <p id="temp9"></p>
+              <p id="wind9"></p>
+              <p id="humidity9"></p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <p id="date17"></p>
+              <p id="icon17"></p>
+              <p id="temp17"></p>
+              <p id="wind17"></p>
+              <p id="humidity17"></p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <p id="date25"></p>
+              <p id="icon25"></p>
+              <p id="temp25"></p>
+              <p id="wind25"></p>
+              <p id="humidity25"></p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <p id="date33"></p>
+              <p id="icon33"></p>
+              <p id="temp33"></p>
+              <p id="wind33"></p>
+              <p id="humidity33"></p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script src="./assets/app.js"></script>
+  </body>
+</html>
