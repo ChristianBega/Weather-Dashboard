@@ -80,7 +80,7 @@ function renderCards(data) {
 }
 
 function renderDayForecast(data) {
-  console.log(data);
+  // console.log(data);
   // var test = data.list[0].weather[0].icon;
   // console.log(data.city.name);
   // console.log(data.list[0].dt_txt);
@@ -88,7 +88,7 @@ function renderDayForecast(data) {
   // console.log(data.list[0].wind.speed);
   // console.log(data.list[0].weather[0].icon);
   var test = `https://openweathermap.org/img/wn/${data.list[0].weather[0]["icon"]}`;
-  console.log(test);
+  // console.log(test);
 
   // Dom manipulation
   var h1El = document.createElement("h1");
@@ -118,16 +118,23 @@ function handleFormSubmit(e) {
   e.preventDefault();
   var cityInput = userInput.value;
   fetchCoordinates(cityInput);
-  // localStorageSet(cityInput);
+  localStorageSet(cityInput);
   // Make an api call with that search term and confirm data is sent back
 }
-
+let recentSearch = [];
 function localStorageSet(city) {
   localStorage.setItem("city", city);
+  recentSearch.push(city);
 }
+console.log(recentSearch);
 
-function localStoreGet() {
-  var test = localStorageSet.getItem("city");
+function localStoreGet(e) {
+  test.textContent = localStorage.getItem("city");
+
+  // for (let i = 0; i < recent.length; i++) {
+  //   // const element = recent[i];
+  //   // console.log(element);
+  // }
 }
 // Event listeners
 userForm.addEventListener("submit", handleFormSubmit);
@@ -143,3 +150,6 @@ userForm.addEventListener("submit", handleFormSubmit);
 
 // localStorage.setItem("cities");
 // ["austin","denver"]
+
+var test = document.querySelector(".test-btn");
+test.addEventListener("click", localStoreGet());
