@@ -4,6 +4,7 @@ var userForm = document.getElementById("form-submit");
 var dayForecast = document.getElementById("current-forecast");
 var weatherApi = "http://api.openweathermap.org/data/2.5/forecast?";
 var apiKey = "898b277c6fc6f18c77b1aabe15516f58";
+var cardBody = document.querySelectorAll(".card-body");
 
 // https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 // https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid={API key}
@@ -45,7 +46,8 @@ function fetchWeather(lat, lon) {
 // responsible for the dynamic creation of the cards based on the data the user wants
 //                 parameter
 function renderCards(data) {
-  index = data.length;
+  // var iconUrl = `https://openweathermap.org/img/wn/${data.list[i].weather[i]["icon"]}.png`;
+
   // console.log(index);
   //
   // console.log(data);
@@ -54,17 +56,15 @@ function renderCards(data) {
     // var testEl = document.createElement("div");
     // var testEl2 = document.createElement("div");
     // var testEl3 = document.createElement("p");
-
     // Change elements
     // testEl.classList.add("card");
     // testEl2.classList.add("card-body");
     // testEl3.textContent = data.list[i].dt_txt;
-
     // Append Elements
     // test.append(testEl);
     // testEl.appendChild(testEl2);
     // testEl2.appendChild(testEl3);
-
+    // var imgEl = document.createElement("img");
     var date = document.getElementById(`date${i}`);
     var icon = document.getElementById(`icon${i}`);
     var temp = document.getElementById(`temp${i}`);
@@ -76,18 +76,26 @@ function renderCards(data) {
     temp.textContent = `Temperature: ${data.list[i].main.temp}`;
     wind.textContent = `Wind Speed: ${data.list[i].wind.speed}`;
     humidity.textContent = `Humidity: ${data.list[0].main.humidity} %`;
+    // imgEl.src = iconUrl;
+
+    //
+    // cardBody.append(imgEl);
   }
 }
 
 function renderDayForecast(data) {
+  var iconUrl = `https://openweathermap.org/img/wn/${data.list[0].weather[0]["icon"]}.png`;
+  // let test = data.list[0].dt_txt;
+  // test.toLocaleDateString("en-US");
+  // console.log(test);
+
   // console.log(data);
-  // var test = data.list[0].weather[0].icon;
+  // var test = data.list[0].weather[0];
   // console.log(data.city.name);
   // console.log(data.list[0].dt_txt);
   // console.log(data.list[0].main.humidity);
   // console.log(data.list[0].wind.speed);
   // console.log(data.list[0].weather[0].icon);
-  var test = `https://openweathermap.org/img/wn/${data.list[0].weather[0]["icon"]}`;
   // console.log(test);
 
   // Dom manipulation
@@ -104,8 +112,7 @@ function renderDayForecast(data) {
   // h1El3.textContent = data.list[0].dt_txt;
   h1El4.textContent = data.list[0].main.humidity;
   h1El5.textContent = data.list[0].wind.speed;
-  imgEl.src = test;
-  // imgEl.src = dayForecast.append(h1El);
+  imgEl.src = iconUrl;
   dayForecast.append(h1El2);
   dayForecast.append(h1El3);
   dayForecast.append(h1El4);
