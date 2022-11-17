@@ -71,9 +71,6 @@ function renderCards(data) {
     wind.textContent = `Wind Speed: ${data.list[i].wind.speed}`;
     humidity.textContent = `Humidity: ${data.list[0].main.humidity} %`;
     // imgEl.src = iconUrl;
-
-    //
-    // cardBody.append(imgEl);
   }
 }
 
@@ -105,6 +102,10 @@ function renderButtons(newBtn) {
   buttonContainer.append(newButtonEl);
 }
 previousButtons.forEach(renderButtons);
+function passedCities(e) {
+  var cityInput = this.textContent;
+  e.preventDefault();
+}
 
 // This function is responsible for form submission and by capturing user input
 function localStorageSet(city) {
@@ -126,7 +127,6 @@ var submitBtn = document.querySelector(".submit-btn");
 userForm.onsubmit = (e) => {
   e.preventDefault();
   var cityInput = userInput.value;
-  console.log(cityInput);
   fetchCoordinates(cityInput);
   renderButtons(cityInput);
   userInput.value = "";
@@ -135,8 +135,5 @@ userForm.onsubmit = (e) => {
 
 // current and forecast weather - https://openweathermap.org/api/one-call-3
 // geocoding api - https://openweathermap.org/api/geocoding-api
-// function clearOpts() {
-//   dayForecast.clear();
-// }
 
 // onsubmit arrow function - https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event
