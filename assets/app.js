@@ -106,6 +106,7 @@ function renderButtons(newBtn) {
   newButtonEl.textContent = newBtn;
   buttonContainer.append(newButtonEl);
 }
+previousButtons.forEach(renderButtons);
 
 // This function is responsible for form submission and by capturing user input
 function localStorageSet(city) {
