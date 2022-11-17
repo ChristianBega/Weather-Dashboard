@@ -5,14 +5,17 @@ var dayForecast = document.getElementById("current-forecast");
 var weatherApi = "http://api.openweathermap.org/data/2.5/forecast?";
 var apiKey = "898b277c6fc6f18c77b1aabe15516f58";
 var cardBody = document.querySelectorAll(".card-body");
+var buttonContainer = document.getElementById("recent-btn-container");
 
 // https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 // https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid={API key}
 
-// Functions
+// fetchCoords function - responsible for fetching api data
 function fetchCoordinates(city) {
-  // This will make the call to get the coordinates for that city
+  // url end point for api
   var rootEndPoint = "http://api.openweathermap.org/geo/1.0/direct";
+  // Concat url end point with needed query parameters
+  // var apiCall = `${rootEndPoint}?q=${city}&appid=${apiKey}`;
   var apiCall = rootEndPoint + "?q=" + city + "&appid=" + apiKey;
   fetch(apiCall)
     .then(function (response) {
@@ -25,7 +28,9 @@ function fetchCoordinates(city) {
     });
 }
 
+// fetchCoords function - responsible for fetching api data
 function fetchWeather(lat, lon) {
+  // var apiCall = `${weatherApi}lat=${lat}&lon${lon}&units=imperial&appid=${apiKey}`;
   var apiCall = weatherApi + "lat=" + lat + "&lon=" + lon + "&units=imperial&" + "appid=" + apiKey;
   fetch(apiCall)
     .then(function (response) {
@@ -43,28 +48,11 @@ function fetchWeather(lat, lon) {
 
   // render the temperature as an h1 to the user
 }
-// responsible for the dynamic creation of the cards based on the data the user wants
-//                 parameter
+
+// responsible for the dynamic creation of the cards based on the data the user inputs
 function renderCards(data) {
   // var iconUrl = `https://openweathermap.org/img/wn/${data.list[i].weather[i]["icon"]}.png`;
-
-  // console.log(index);
-  //
-  // console.log(data);
   for (let i = 1; i < data.list.length; i += 8) {
-    // Created elements
-    // var testEl = document.createElement("div");
-    // var testEl2 = document.createElement("div");
-    // var testEl3 = document.createElement("p");
-    // Change elements
-    // testEl.classList.add("card");
-    // testEl2.classList.add("card-body");
-    // testEl3.textContent = data.list[i].dt_txt;
-    // Append Elements
-    // test.append(testEl);
-    // testEl.appendChild(testEl2);
-    // testEl2.appendChild(testEl3);
-    // var imgEl = document.createElement("img");
     var date = document.getElementById(`date${i}`);
     var icon = document.getElementById(`icon${i}`);
     var temp = document.getElementById(`temp${i}`);
@@ -85,18 +73,6 @@ function renderCards(data) {
 
 function renderDayForecast(data) {
   var iconUrl = `https://openweathermap.org/img/wn/${data.list[0].weather[0]["icon"]}.png`;
-  // let test = data.list[0].dt_txt;
-  // test.toLocaleDateString("en-US");
-  // console.log(test);
-
-  // console.log(data);
-  // var test = data.list[0].weather[0];
-  // console.log(data.city.name);
-  // console.log(data.list[0].dt_txt);
-  // console.log(data.list[0].main.humidity);
-  // console.log(data.list[0].wind.speed);
-  // console.log(data.list[0].weather[0].icon);
-  // console.log(test);
 
   // Dom manipulation
   var h1El = document.createElement("h1");
@@ -120,43 +96,47 @@ function renderDayForecast(data) {
   dayForecast.append(imgEl);
 }
 
-// This function is responsible for form submission and by capturing user input
-function handleFormSubmit(e) {
-  e.preventDefault();
-  var cityInput = userInput.value;
-  fetchCoordinates(cityInput);
-  localStorageSet(cityInput);
-  // Make an api call with that search term and confirm data is sent back
+const previousButtons = JSON.parse(localStorage.getItem("previousButtons")) || [];
+function renderButtons(newBtn) {
+  previousButtons.push(newBtn);
+  localStorage.setItem("previousButtons", JSON.stringify(previousButtons));
+
+  const newButtonEl = document.createElement("button");
+  newButtonEl.classList.add("btn", "px-5", "bg-dark", "text-light", "w-100", "my-2");
+  newButtonEl.textContent = newBtn;
+  buttonContainer.append(newButtonEl);
 }
-let recentSearch = [];
+
+// This function is responsible for form submission and by capturing user input
 function localStorageSet(city) {
+  let recentSearch = [];
   localStorage.setItem("city", city);
   recentSearch.push(city);
+  console.log(city);
 }
-console.log(recentSearch);
 
-function localStoreGet(e) {
-  test.textContent = localStorage.getItem("city");
-
-  // for (let i = 0; i < recent.length; i++) {
-  //   // const element = recent[i];
-  //   // console.log(element);
-  // }
+function localStoreGet(city) {
+  localStorage.getItem("city");
+  // renderButtons(city);
 }
 // Event listeners
-userForm.addEventListener("submit", handleFormSubmit);
+
+var submitBtn = document.querySelector(".submit-btn");
+// userForm.addEventListener("submit", handleFormSubmit);
+
+userForm.onsubmit = (e) => {
+  e.preventDefault();
+  var cityInput = userInput.value;
+  console.log(cityInput);
+  fetchCoordinates(cityInput);
+  renderButtons(cityInput);
+  userInput.value = "";
+};
 
 // current and forecast weather - https://openweathermap.org/api/one-call-3
 // geocoding api - https://openweathermap.org/api/geocoding-api
+// function clearOpts() {
+//   dayForecast.clear();
+// }
 
-// local storage -
-// Create global empty array
-// push that value (name of the city) to that array
-
-// localStorage.getItem("cities");
-
-// localStorage.setItem("cities");
-// ["austin","denver"]
-
-var test = document.querySelector(".test-btn");
-test.addEventListener("click", localStoreGet());
+// onsubmit arrow function - https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event
