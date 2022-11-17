@@ -14,12 +14,12 @@
     <title>Home Work #6</title>
   </head>
   <body>
-    <header class="container-fluid text-center text-white bg-dark p-3">
+    <header class="container-fluid text-center text-white bg-dark p-4 mb-5">
       <h1>Weather Dashboard</h1>
     </header>
-    <main class="container-fluid">
-      <div class="row">
-        <aside class="col-lg-3">
+    <main class="container-fluid p-4 bg-dark">
+      <div class="row rounded align-content-between">
+        <aside class="col-lg-3 text-dark bg-light rounded mb-5">
           <h2>Search for a City:</h2>
           <form id="form-submit">
             <div class="mb-3">
@@ -29,8 +29,17 @@
           </form>
           <div id="recent-btn-container"></div>
         </aside>
-        <section class="col-lg-9 results-section bg-primary" id="current-forecast"></section>
-        <section class="container w-75 d-flex justify-content-center flex-wrap">
+        <section class="col-lg-9 results-section ps-2" id="current-forecast">
+          <div class="text-container bg-light h-100">
+            <h3 class="fs-5 d-inline" id="city-name"></h3>
+            <span class="fs-5 fw-bold ms-2" id="date"></span>
+            <img id="weather-icon" class="" src="" />
+            <p id="temperature"></p>
+            <p id="wind-speeds"></p>
+            <p id="humidity"></p>
+          </div>
+        </section>
+        <section class="col-12 d-flex flex-column flex-lg-row justify-content-center align-content-center flex-wrap">
           <div class="card m-4">
             <div class="card-body">
               <p id="date1"></p>

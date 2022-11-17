@@ -2,6 +2,12 @@
 var userInput = document.getElementById("user-input");
 var userForm = document.getElementById("form-submit");
 var dayForecast = document.getElementById("current-forecast");
+var cityName = document.getElementById("city-name");
+var date = document.getElementById("date");
+var weatherIcon = document.getElementById("weather-icon");
+var temperature = document.getElementById("temperature");
+var windSpeeds = document.getElementById("wind-speeds");
+var humidity = document.getElementById("humidity");
 var weatherApi = "http://api.openweathermap.org/data/2.5/forecast?";
 var apiKey = "898b277c6fc6f18c77b1aabe15516f58";
 var cardBody = document.querySelectorAll(".card-body");
@@ -74,35 +80,27 @@ function renderCards(data) {
 function renderDayForecast(data) {
   var iconUrl = `https://openweathermap.org/img/wn/${data.list[0].weather[0]["icon"]}.png`;
 
-  // Dom manipulation
-  var h1El = document.createElement("h1");
-  var h1El2 = document.createElement("h1");
-  var h1El3 = document.createElement("h1");
-  var h1El4 = document.createElement("h1");
-  var h1El5 = document.createElement("h1");
-  var imgEl = document.createElement("img");
+  // // Dom manipulation
+  // var h1El = document.createElement("h1");
+  // var h1El2 = document.createElement("h1");
+  // var h1El3 = document.createElement("h1");
+  // var h1El4 = document.createElement("h1");
+  // var h1El5 = document.createElement("h1");
+  // var imgEl = document.createElement("img");
 
-  h1El.textContent = data.list[0].main.temp;
-  h1El2.textContent = data.city.name;
-  h1El3.textContent = data.list[0].dt_txt;
-  // h1El3.textContent = data.list[0].dt_txt;
-  h1El4.textContent = data.list[0].main.humidity;
-  h1El5.textContent = data.list[0].wind.speed;
-  imgEl.src = iconUrl;
-  dayForecast.append(h1El2);
-  dayForecast.append(h1El3);
-  dayForecast.append(h1El4);
-  dayForecast.append(h1El5);
-  dayForecast.append(imgEl);
+  cityName.textContent = data.city.name;
+  date.textContent = data.list[0].dt_txt;
+  temperature.textContent = data.list[0].main.temp;
+  windSpeeds.textContent = data.list[0].main.humidity;
+  humidity.textContent = data.list[0].wind.speed;
+  weatherIcon.src = iconUrl;
 }
 
 const previousButtons = JSON.parse(localStorage.getItem("previousButtons")) || [];
 function renderButtons(newBtn) {
   previousButtons.push(newBtn);
-  localStorage.setItem("previousButtons", JSON.stringify(previousButtons));
-
   const newButtonEl = document.createElement("button");
-  newButtonEl.classList.add("btn", "px-5", "bg-dark", "text-light", "w-100", "my-2");
+  newButtonEl.classList.add("btn", "px-5", "bg-danger", "text-light", "w-100", "my-2");
   newButtonEl.textContent = newBtn;
   buttonContainer.append(newButtonEl);
 }
@@ -132,6 +130,7 @@ userForm.onsubmit = (e) => {
   fetchCoordinates(cityInput);
   renderButtons(cityInput);
   userInput.value = "";
+  localStorage.setItem("previousButtons", JSON.stringify(previousButtons));
 };
 
 // current and forecast weather - https://openweathermap.org/api/one-call-3
