@@ -1,6 +1,7 @@
 // Variable declarations
 var userInput = document.getElementById("user-input");
 var userForm = document.getElementById("form-submit");
+var clearBtn = document.getElementById("clear-btn");
 var dayForecast = document.getElementById("current-forecast");
 var cityName = document.getElementById("city-name");
 var date = document.getElementById("date");
@@ -85,9 +86,10 @@ function renderCards(data) {
 
 function renderDayForecast(data) {
   var iconUrl = `https://openweathermap.org/img/wn/${data.list[0].weather[0]["icon"]}.png`;
+  let test = new Date(data.list[0].dt_txt);
 
   cityName.textContent = data.city.name;
-  date.textContent = data.list[0].dt_txt;
+  date.textContent = test.toLocaleDateString("en-us", { year: "numeric", month: "numeric", day: "numeric" });
   temperature.textContent = data.list[0].main.temp;
   windSpeeds.textContent = data.list[0].main.humidity;
   humidity.textContent = data.list[0].wind.speed;
@@ -98,12 +100,16 @@ const previousButtons = JSON.parse(localStorage.getItem("previousButtons")) || [
 function renderButtons(newBtn) {
   previousButtons.push(newBtn);
   const newButtonEl = document.createElement("button");
-  newButtonEl.classList.add("btn", "px-5", "bg-danger", "text-light", "w-100", "my-2"); 
+  newButtonEl.classList.add("btn", "recentSearch", "px-5", "bg-danger", "text-light", "w-100", "my-2");
   newButtonEl.textContent = newBtn;
-  // newButtonEl.addEventListener("click", fetchCoordinates(cityInput));
   buttonContainer.append(newButtonEl);
 }
 previousButtons.forEach(renderButtons);
+buttonContainer.addEventListener("click", function (e) {
+  let test = e.target.innerText;
+  fetchCoordinates(test);
+});
+
 // function passedCities(e) {
 //   e.preventDefault();
 //   var button = e.target();
@@ -126,6 +132,9 @@ function localStoreGet(city) {
 // Event listeners
 
 var submitBtn = document.querySelector(".submit-btn");
+clearBtn.addEventListener("onclick", function () {
+  localStorage.clear();
+});
 // userForm.addEventListener("submit", handleFormSubmit);
 
 // current and forecast weather - https://openweathermap.org/api/one-call-3
