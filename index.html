@@ -20,18 +20,18 @@
     <main class="container-fluid p-4">
       <div class="row rounded align-content-between">
         <aside class="col-lg-3 text-dark bg-light rounded mb-5">
-          <h2>Search for a City:</h2>
+          <h2 class="py-3 text-center">Search for a City:</h2>
           <form id="form-submit">
             <div class="mb-3">
-              <input type="text" class="form-control" id="user-input" aria-describedby="userInput" />
+              <input placeholder="Search for a city..." type="text" class="form-control" id="user-input" aria-describedby="userInput" />
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
-            <button class="btn btn-secondary ms-3" id="clear-btn">Clear</button>
           </form>
+          <button class="btn btn-secondary my-3" id="clear-btn">Clear</button>
           <div id="recent-btn-container"></div>
         </aside>
-        <section class="col-lg-9 results-section ps-2" id="current-forecast">
-          <div class="text-container bg-light h-100 p-3">
+        <section class="col-lg-9 results-section" id="current-forecast">
+          <div class="text-container bg-light h-100 p-3 rounded">
             <h3 class="fs-5 d-inline" id="city-name"></h3>
             <span class="fs-5 fw-bold ms-2" id="date"></span>
             <img id="weather-icon" class="" src="" />
@@ -40,8 +40,8 @@
             <p id="humidity"></p>
           </div>
         </section>
-        <section class="col-12 d-flex flex-column flex-lg-row justify-content-center align-content-center flex-wrap">
-          <div class="card m-4">
+        <section class="col-12 d-flex flex-column flex-lg-row justify-content-center align-content-center flex-wrap" id="card-container">
+          <!-- <div class="card m-4">
             <div class="card-body">
               <p id="date1"></p>
               <p id="icon1"></p>
@@ -85,7 +85,7 @@
               <p id="wind33"></p>
               <p id="humidity33"></p>
             </div>
-          </div>
+          </div> -->
         </section>
       </div>
     </main>
