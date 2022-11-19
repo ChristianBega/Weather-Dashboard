@@ -62,33 +62,48 @@ function fetchWeather(lat, lon) {
 
 // responsible for the dynamic creation of the cards based on the data the user inputs
 function renderCards(data) {
-  console.log(data);
+  // console.log(data);
   let newDate = new Date(data.list[0].dt_txt);
   let card = "";
+  let newData = data.splice(0, 8);
+  console.log(newData);
+
+  data.list.map(function (value) {
+    // console.log(value);
+  });
+
+  // for (let i = 1; i < data.list.length; i += 8) {
+  //   // var date = document.getElementById(`date${i}`);
+  //   // var icon = document.getElementById(`icon${i}`);
+  //   // var temp = document.getElementById(`temp${i}`);
+  //   // var wind = document.getElementById(`wind${i}`);
+  //   // var humidity = document.getElementById(`humidity${i}`);
+
+  //   // date.textContent = data.list[i].dt_txt;
+  //   // date.textContent = data.list[i].dt_txt;
+  //   // temp.textContent = `Temperature: ${data.list[i].main.temp}`;
+  //   // wind.textContent = `Wind Speed: ${data.list[i].wind.speed}`;
+  //   // humidity.textContent = `Humidity: ${data.list[0].main.humidity} %`;
+  //   // imgEl.src = iconUrl;
   // var iconUrl = `https://openweathermap.org/img/wn/${data.list[i].weather[i]["icon"]}.png`;
-  for (let i = 1; i < data.list.length; i += 8) {
-    let e = e[i];
-    console.log(e);
-    // var date = document.getElementById(`date${i}`);
-    // var icon = document.getElementById(`icon${i}`);
-    // var temp = document.getElementById(`temp${i}`);
-    // var wind = document.getElementById(`wind${i}`);
-    // var humidity = document.getElementById(`humidity${i}`);
+  // for (let i = 0; i < data.list.length; i += 8) {
+  //   const res = data.list[i];
+  //   console.log(res.dt_txt);
+  //   console.log(res.main.temp);
+  //   console.log(res.wind.speed);
+  //   console.log(res.main.humidity);
 
-    // date.textContent = data.list[i].dt_txt;
-    // date.textContent = data.list[i].dt_txt;
-    // temp.textContent = `Temperature: ${data.list[i].main.temp}`;
-    // wind.textContent = `Wind Speed: ${data.list[i].wind.speed}`;
-    // humidity.textContent = `Humidity: ${data.list[0].main.humidity} %`;
-    // imgEl.src = iconUrl;
+  //   // card = `<div class="card">${res.dt_txt}</div>`();
+  //   cardContainer.appendChild(card);
+  // }
 
-    // Created elements
-    card += `<div>Test</div>`;
-    cardContainer.append(card);
+  //   // Created elements
+  //   // card += `<div>Test</div>`;
+  //   // cardContainer.append(card);
 
-    // Update elements
-    // append elements
-  }
+  //   // Update elements
+  //   // append elements
+  // }
 }
 
 function renderDayForecast(data) {
