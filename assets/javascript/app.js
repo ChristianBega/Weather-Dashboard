@@ -1,6 +1,7 @@
 // Variable declarations
 var userInput = document.getElementById("user-input");
 var userForm = document.getElementById("form-submit");
+var submitBtn = document.querySelector(".submit-btn");
 var clearBtn = document.getElementById("clear-btn");
 var dayForecast = document.getElementById("current-forecast");
 var cityName = document.getElementById("city-name");
@@ -14,19 +15,18 @@ var apiKey = "898b277c6fc6f18c77b1aabe15516f58";
 var cardContainer = document.getElementById("card-container");
 var buttonContainer = document.getElementById("recent-btn-container");
 
-// https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
-// https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid={API key}
-// fetchCoords function - responsible for fetching api data
-
+// Event listener to listen for click events on form
 userForm.onsubmit = (e) => {
   e.preventDefault();
   var cityInput = userInput.value;
   fetchCoordinates(cityInput);
   renderButtons(cityInput);
   userInput.value = "";
+  // Setting search result to local storage
   localStorage.setItem("previousButtons", JSON.stringify(previousButtons));
 };
 
+// Function responsible for fetching api data
 function fetchCoordinates(city) {
   // url end point for api
   var rootEndPoint = "https://api.openweathermap.org/geo/1.0/direct";
@@ -44,9 +44,8 @@ function fetchCoordinates(city) {
     });
 }
 
-// fetchCoords function - responsible for fetching api data
+// Function responsible for fetching api data
 function fetchWeather(lat, lon) {
-  // var apiCall = `${weatherApi}lat=${lat}&lon${lon}&units=imperial&appid=${apiKey}`;
   var apiCall = weatherApi + "lat=" + lat + "&lon=" + lon + "&units=imperial&" + "appid=" + apiKey;
   fetch(apiCall)
     .then(function (response) {
@@ -56,56 +55,32 @@ function fetchWeather(lat, lon) {
       renderDayForecast(data);
       renderCards(data);
     });
-
-  // render the temperature as an h1 to the user
 }
 
-// responsible for the dynamic creation of the cards based on the data the user inputs
+// Function responsible for dynamically creating 5 day forecast
 function renderCards(data) {
-  // console.log(data);
-  let newDate = new Date(data.list[0].dt_txt);
   let card = "";
-  let newData = data.splice(0, 8);
-  console.log(newData);
-
-  data.list.map(function (value) {
-    // console.log(value);
-  });
-
-  // for (let i = 1; i < data.list.length; i += 8) {
-  //   // var date = document.getElementById(`date${i}`);
-  //   // var icon = document.getElementById(`icon${i}`);
-  //   // var temp = document.getElementById(`temp${i}`);
-  //   // var wind = document.getElementById(`wind${i}`);
-  //   // var humidity = document.getElementById(`humidity${i}`);
-
-  //   // date.textContent = data.list[i].dt_txt;
-  //   // date.textContent = data.list[i].dt_txt;
-  //   // temp.textContent = `Temperature: ${data.list[i].main.temp}`;
-  //   // wind.textContent = `Wind Speed: ${data.list[i].wind.speed}`;
-  //   // humidity.textContent = `Humidity: ${data.list[0].main.humidity} %`;
-  //   // imgEl.src = iconUrl;
-  // var iconUrl = `https://openweathermap.org/img/wn/${data.list[i].weather[i]["icon"]}.png`;
-  // for (let i = 0; i < data.list.length; i += 8) {
-  //   const res = data.list[i];
-  //   console.log(res.dt_txt);
-  //   console.log(res.main.temp);
-  //   console.log(res.wind.speed);
-  //   console.log(res.main.humidity);
-
-  //   // card = `<div class="card">${res.dt_txt}</div>`();
-  //   cardContainer.appendChild(card);
-  // }
-
-  //   // Created elements
-  //   // card += `<div>Test</div>`;
-  //   // cardContainer.append(card);
-
-  //   // Update elements
-  //   // append elements
-  // }
+  for (let i = 1; i < data.list.length; i += 8) {
+    const res = data.list[i];
+    let newDate = new Date(data.list[i].dt_txt);
+    let iconUrl = `https://openweathermap.org/img/wn/${res.weather[0].icon}.png`;
+    // Template literal that will create each day forecast card
+    card += `
+    <div class="card m-4 shadow-lg">
+      <div class="card-body text-white bg-dark rounded">
+        <p class="fw-bold fs-4">${newDate.toLocaleDateString("en-us", { year: "numeric", month: "numeric", day: "numeric" })}</p>
+        <img src="${iconUrl}"></img>
+        <p>Temp: ${res.main.temp}${"\u00B0F"}</p>
+        <p>Wind: ${res.wind.speed} MPH</p>
+        <p>Humidity: ${res.main.humidity} %</p>
+      </div>
+    </div>
+    `;
+  }
+  $("#card-container").append(card);
 }
 
+// Function responsible for updating the current day forecast
 function renderDayForecast(data) {
   var iconUrl = `https://openweathermap.org/img/wn/${data.list[0].weather[0]["icon"]}.png`;
   let newDate = new Date(data.list[0].dt_txt);
@@ -118,29 +93,38 @@ function renderDayForecast(data) {
   weatherIcon.src = iconUrl;
 }
 
+// Getting search result from local storage (an array of search results)
 const previousButtons = JSON.parse(localStorage.getItem("previousButtons")) || [];
+// Function responsible for dynamically creating recent searches buttons
 function renderButtons(newBtn) {
   previousButtons.push(newBtn);
   const newButtonEl = document.createElement("button");
-  newButtonEl.classList.add("btn", "recentSearch", "px-5", "bg-danger", "text-light", "w-100", "my-2");
+  newButtonEl.classList.add("btn", "recentSearch", "px-5", "bg-success", "text-light", "w-100", "my-2");
   newButtonEl.textContent = newBtn;
   buttonContainer.append(newButtonEl);
 }
+// For each previous button, call renderButtons function to create each search button
 previousButtons.forEach(renderButtons);
+// Event listener to listen for click events in buttonContainer
 buttonContainer.addEventListener("click", function (e) {
-  let test = e.target.innerText;
-  fetchCoordinates(test);
+  let recentCities = e.target.innerText;
+  fetchCoordinates(recentCities);
 });
 
-var submitBtn = document.querySelector(".submit-btn");
+// Event listener to listen for click events on clearBtn
 clearBtn.addEventListener("click", function () {
-  console.log("test");
+  // Clears local storage
   window.localStorage.clear();
+  // Clears text-container, buttonContainer, and cardContainer
   buttonContainer.textContent = "";
+  cardContainer.textContent = "";
 });
-// userForm.addEventListener("submit", handleFormSubmit);
+
+// Resources ::
 
 // current and forecast weather - https://openweathermap.org/api/one-call-3
 // geocoding api - https://openweathermap.org/api/geocoding-api
-
 // onsubmit arrow function - https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event
+// forEach () - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+// toLocaleDateString () - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
+// template literals - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals

@@ -6,5 +6,5 @@ body {
 .card {
   min-width: 15rem;
   height: 20rem;
-  background-color: lightgray;
+  background-color: none;
 }

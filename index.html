@@ -14,13 +14,16 @@
     <title>Home Work #6</title>
   </head>
   <body>
+    <!-- Header -->
     <header class="container-fluid text-center text-white bg-dark p-4 mb-5">
       <h1>Weather Dashboard</h1>
     </header>
+    <!-- Main -->
     <main class="container-fluid p-4">
       <div class="row rounded align-content-between">
-        <aside class="col-lg-3 text-dark bg-light rounded mb-5">
-          <h2 class="py-3 text-center">Search for a City:</h2>
+        <!-- aside -->
+        <aside class="col-lg-3 text-dark bg-dark rounded mb-5 border border-light">
+          <h2 class="py-3 text-center text-light">Search for a City:</h2>
           <form id="form-submit">
             <div class="mb-3">
               <input placeholder="Search for a city..." type="text" class="form-control" id="user-input" aria-describedby="userInput" />
@@ -30,8 +33,9 @@
           <button class="btn btn-secondary my-3" id="clear-btn">Clear</button>
           <div id="recent-btn-container"></div>
         </aside>
+        <!-- Current forecast -->
         <section class="col-lg-9 results-section" id="current-forecast">
-          <div class="text-container bg-light h-100 p-3 rounded">
+          <div class="text-container h-100 bg-dark text-light p-3 rounded border border-light">
             <h3 class="fs-5 d-inline" id="city-name"></h3>
             <span class="fs-5 fw-bold ms-2" id="date"></span>
             <img id="weather-icon" class="" src="" />
@@ -40,53 +44,8 @@
             <p id="humidity"></p>
           </div>
         </section>
-        <section class="col-12 d-flex flex-column flex-lg-row justify-content-center align-content-center flex-wrap" id="card-container">
-          <!-- <div class="card m-4">
-            <div class="card-body">
-              <p id="date1"></p>
-              <p id="icon1"></p>
-              <p id="temp1"></p>
-              <p id="wind1"></p>
-              <p id="humidity1"></p>
-            </div>
-          </div>
-          <div class="card m-4">
-            <div class="card-body">
-              <p id="date9"></p>
-              <p id="icon9"></p>
-              <p id="temp9"></p>
-              <p id="wind9"></p>
-              <p id="humidity9"></p>
-            </div>
-          </div>
-          <div class="card m-4">
-            <div class="card-body">
-              <p id="date17"></p>
-              <p id="icon17"></p>
-              <p id="temp17"></p>
-              <p id="wind17"></p>
-              <p id="humidity17"></p>
-            </div>
-          </div>
-          <div class="card m-4">
-            <div class="card-body">
-              <p id="date25"></p>
-              <p id="icon25"></p>
-              <p id="temp25"></p>
-              <p id="wind25"></p>
-              <p id="humidity25"></p>
-            </div>
-          </div>
-          <div class="card m-4">
-            <div class="card-body">
-              <p id="date33"></p>
-              <p id="icon33"></p>
-              <p id="temp33"></p>
-              <p id="wind33"></p>
-              <p id="humidity33"></p>
-            </div>
-          </div> -->
-        </section>
+        <!-- 5 day forecast -->
+        <section class="col-12 d-flex flex-column flex-lg-row justify-content-center align-content-center flex-wrap" id="card-container"></section>
       </div>
     </main>
     <script
