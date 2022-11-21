@@ -20,10 +20,22 @@ userForm.onsubmit = (e) => {
   e.preventDefault();
   var cityInput = userInput.value;
   fetchCoordinates(cityInput);
-  renderButtons(cityInput);
   userInput.value = "";
+
+  let cities = JSON.parse(localStorage.getItem("previousButtons")) || [];
+
+  let filteredData = cities.filter((city) => city === cityInput);
+  console.log(filteredData);
+
+  if (filteredData.length === 0) {
+    cities.push(cityInput);
+  } else {
+  }
   // Setting search result to local storage
-  localStorage.setItem("previousButtons", JSON.stringify(previousButtons));
+  console.log(cities);
+  console.log(cities[0]);
+  localStorage.setItem("previousButtons", JSON.stringify(cities));
+  renderButtons(cities);
 };
 
 // Function responsible for fetching api data
@@ -59,6 +71,7 @@ function fetchWeather(lat, lon) {
 
 // Function responsible for dynamically creating 5 day forecast
 function renderCards(data) {
+  cardContainer.innerHTML = "";
   let card = "";
   for (let i = 1; i < data.list.length; i += 8) {
     const res = data.list[i];
@@ -95,16 +108,19 @@ function renderDayForecast(data) {
 
 // Getting search result from local storage (an array of search results)
 const previousButtons = JSON.parse(localStorage.getItem("previousButtons")) || [];
+console.log(previousButtons);
 // Function responsible for dynamically creating recent searches buttons
 function renderButtons(newBtn) {
-  previousButtons.push(newBtn);
-  const newButtonEl = document.createElement("button");
-  newButtonEl.classList.add("btn", "recentSearch", "px-5", "bg-success", "text-light", "w-100", "my-2");
-  newButtonEl.textContent = newBtn;
-  buttonContainer.append(newButtonEl);
+  buttonContainer.innerHTML = "";
+  for (let i = 0; i < newBtn.length; i++) {
+    const newButtonEl = document.createElement("button");
+    newButtonEl.classList.add("btn", "recentSearch", "px-5", "bg-success", "text-light", "w-100", "my-2");
+    newButtonEl.textContent = newBtn[i];
+    buttonContainer.append(newButtonEl);
+  }
 }
 // For each previous button, call renderButtons function to create each search button
-previousButtons.forEach(renderButtons);
+// previousButtons.forEach(renderButtons);
 // Event listener to listen for click events in buttonContainer
 buttonContainer.addEventListener("click", function (e) {
   let recentCities = e.target.innerText;
