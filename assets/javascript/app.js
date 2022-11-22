@@ -4,6 +4,7 @@ var userForm = document.getElementById("form-submit");
 var submitBtn = document.querySelector(".submit-btn");
 var clearBtn = document.getElementById("clear-btn");
 var dayForecast = document.getElementById("current-forecast");
+var textContainer = document.querySelector(".text-container");
 var cityName = document.getElementById("city-name");
 var date = document.getElementById("date");
 var weatherIcon = document.getElementById("weather-icon");
@@ -25,15 +26,12 @@ userForm.onsubmit = (e) => {
   let cities = JSON.parse(localStorage.getItem("previousButtons")) || [];
 
   let filteredData = cities.filter((city) => city === cityInput);
-  console.log(filteredData);
 
   if (filteredData.length === 0) {
     cities.push(cityInput);
   } else {
   }
   // Setting search result to local storage
-  console.log(cities);
-  console.log(cities[0]);
   localStorage.setItem("previousButtons", JSON.stringify(cities));
   renderButtons(cities);
 };
