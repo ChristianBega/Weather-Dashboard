@@ -1,6 +1,6 @@
 # Weather Dashboard
 
-A weather dashboard applications that utilizes Open Weather Api to display the current and the predicted five day forecast. 
+A weather dashboard applications that utilizes Open Weather Api to display the current and the predicted five day forecast.
 
 ---
 
@@ -56,7 +56,7 @@ Give an example
 
 ## Deployment
 
-- [Weather Dashboard](https://t3mpz.github.io/weather-dashboard/)
+- [Weather Dashboard](https://t3mpz.github.io/Weather-Dashboard/)
 
 ## Built With
 
