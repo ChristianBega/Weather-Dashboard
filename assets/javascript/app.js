@@ -36,12 +36,11 @@ userForm.onsubmit = (e) => {
   renderButtons(cities);
 };
 
-// Function responsible for fetching api data
+// Function responsible for fetching api data (Coordinates)
 function fetchCoordinates(city) {
   // url end point for api
   var rootEndPoint = "https://api.openweathermap.org/geo/1.0/direct";
   // Concat url end point with needed query parameters
-  // var apiCall = `${rootEndPoint}?q=${city}&appid=${apiKey}`;
   var apiCall = rootEndPoint + "?q=" + city + "&appid=" + apiKey;
   fetch(apiCall)
     .then(function (response) {
@@ -54,7 +53,7 @@ function fetchCoordinates(city) {
     });
 }
 
-// Function responsible for fetching api data
+// Function responsible for fetching api data (Latitude and longitude )
 function fetchWeather(lat, lon) {
   var apiCall = weatherApi + "lat=" + lat + "&lon=" + lon + "&units=imperial&" + "appid=" + apiKey;
   fetch(apiCall)
