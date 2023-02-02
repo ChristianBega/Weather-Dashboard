@@ -6,7 +6,7 @@ import WeatherDisplay from "../Components/weatherDisplay";
 export default function dashboard() {
   return (
     <>
-      <div className="container min-h-screen mt-10">
+      <div className="container min-h-screen  mt-10">
         <SearchForm />
         <WeatherDisplay />
         <CardDisplay />
