@@ -7,8 +7,8 @@ export default function dashboard() {
   return (
     <>
       <div className="container">
-        <SearchForm className="w-50" />
-        <WeatherDisplay className="w-50" />
+        <SearchForm />
+        <WeatherDisplay />
         <CardDisplay />
       </div>
     </>
