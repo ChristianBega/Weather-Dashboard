@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function searchForm() {
+export default function SearchForm() {
+  const [userSearch, setUserSearch] = useState({ city: "" });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUserSearch({ ...userSearch, [name]: value });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      console.log(userSearch);
+      // Take userSearch and make fetch call to weather api
+    } catch (error) {
+      console.error(error);
+    }
+    setUserSearch({ city: "" });
+  };
+
   return (
-    <form id="form-submit" className="flex flex-col items-center rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70">
-      <h2 class="py-3 my-4 text-2xl">Search for a City:</h2>
+    <form
+      onSubmit={handleSubmit}
+      id="form-submit"
+      className="flex flex-col items-center rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70"
+    >
+      <h2 className="py-3 my-4 text-2xl">Search for a City:</h2>
       <input
+        name="city"
+        onChange={handleChange}
+        value={userSearch.city}
         className="w-5/6 mb-10 p-3 rounded-md bg-neutral-500 placeholder-white"
         placeholder="Search for a city..."
         type="text"
