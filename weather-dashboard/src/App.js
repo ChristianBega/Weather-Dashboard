@@ -6,7 +6,6 @@ function App() {
   return (
     <>
       <Navigation />
-      <h1>Hello World</h1>
       <Dashboard />
       <Navigation />
     </>
