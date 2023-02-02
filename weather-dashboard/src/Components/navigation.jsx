@@ -4,10 +4,11 @@ import React, { Fragment } from "react";
 // function classNames(...classes) {
 //   return classes.filter(Boolean).join(" ");
 // }
-
+// --tw-border-opacity: 1;
+// border-color: rgb(31 41 55/var(--tw-border-opacity));
 export default function navigation() {
   return (
-    <div className="w-full, h-20 flex justify-center items-center px-8 text-white">
+    <nav className="sticky top-0 w-full, h-20 flex justify-center items-center px-8 text-white bg-zinc-900/50 backdrop-blur-sm">
       <h1 className="text-3xl text-[#edeaea]">Weather Dashboard</h1>
       {/* <ul className="flex items-center">
         <li className="px-4">
@@ -37,6 +38,6 @@ export default function navigation() {
           </Menu>
         </li>
       </ul> */}
-    </div>
+    </nav>
   );
 }
