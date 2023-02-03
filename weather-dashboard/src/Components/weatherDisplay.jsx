@@ -4,6 +4,10 @@ import Cards from "./cards";
 
 export default function WeatherDisplay({ userSearch, isSubmitted }) {
   let [data, setData] = useState({ name: "", date: "", temp: 0, windSpeed: 0, humidity: 0, iconUrl: undefined });
+
+  // data2 - that will track the state of the next 5 days forecast an array of objects
+  let [data2, setData2] = useState([{ name: "", date: "", temp: 0, windSpeed: 0, humidity: 0, iconUrl: undefined }]);
+
   // Creating use state to track lat and lon state
 
   useEffect(() => {
@@ -14,7 +18,7 @@ export default function WeatherDisplay({ userSearch, isSubmitted }) {
       lat = responseCoords[0].lat;
       lon = responseCoords[0].lon;
       const responseCurrentWeather = await API.getWeather(lat, lon);
-      // console.log(lat, lon);
+      // console.log("Latitude and longitude : "lat, lon);
       console.log("Current Weather response", responseCurrentWeather);
       setData({
         name: responseCurrentWeather.city.name,
@@ -24,6 +28,43 @@ export default function WeatherDisplay({ userSearch, isSubmitted }) {
         humidity: responseCurrentWeather.list[0].main.humidity,
         iconUrl: `https://openweathermap.org/img/wn/${responseCurrentWeather.list[0].weather[0].icon}.png`,
       });
+      // console.log("Data for current day forecast (Line 31)", data);
+
+      setData2([
+        {
+          name: responseCurrentWeather.city.name,
+          date: responseCurrentWeather.list[8].dt_txt,
+          temp: responseCurrentWeather.list[8].main.temp,
+          wind: responseCurrentWeather.list[8].wind.speed,
+          humidity: responseCurrentWeather.list[8].main.humidity,
+          iconUrl: `https://openweathermap.org/img/wn/${responseCurrentWeather.list[8].weather[0].icon}.png`,
+        },
+        {
+          name: responseCurrentWeather.city.name,
+          date: responseCurrentWeather.list[16].dt_txt,
+          temp: responseCurrentWeather.list[16].main.temp,
+          wind: responseCurrentWeather.list[16].wind.speed,
+          humidity: responseCurrentWeather.list[16].main.humidity,
+          iconUrl: `https://openweathermap.org/img/wn/${responseCurrentWeather.list[16].weather[0].icon}.png`,
+        },
+        {
+          name: responseCurrentWeather.city.name,
+          date: responseCurrentWeather.list[24].dt_txt,
+          temp: responseCurrentWeather.list[24].main.temp,
+          wind: responseCurrentWeather.list[24].wind.speed,
+          humidity: responseCurrentWeather.list[24].main.humidity,
+          iconUrl: `https://openweathermap.org/img/wn/${responseCurrentWeather.list[24].weather[0].icon}.png`,
+        },
+        {
+          name: responseCurrentWeather.city.name,
+          date: responseCurrentWeather.list[32].dt_txt,
+          temp: responseCurrentWeather.list[32].main.temp,
+          wind: responseCurrentWeather.list[32].wind.speed,
+          humidity: responseCurrentWeather.list[32].main.humidity,
+          iconUrl: `https://openweathermap.org/img/wn/${responseCurrentWeather.list[32].weather[0].icon}.png`,
+        },
+      ]);
+      // console.log("Data for 5 day forecast (Line 67)", data2);
 
       // Extra data from Api for future development
       // console.log("City Feels Like : ", responseCurrentWeather.list[0].main.feels_like);
@@ -62,7 +103,20 @@ export default function WeatherDisplay({ userSearch, isSubmitted }) {
 
             <p id="humidity">Humidity : {data.humidity} % </p>
           </section>
-          <Cards isSubmitted={isSubmitted} />
+          <section className="flex flex-col items-center md:flex-row md:justify-between gap-x-7 flex-wrap mb-10" id="card-container">
+            {data2.map((dayForecast, index) => (
+              <Cards
+                isSubmitted={isSubmitted}
+                key={index}
+                name={dayForecast.name}
+                date={dayForecast.date}
+                temp={dayForecast.temp}
+                wind={dayForecast.wind}
+                humidity={dayForecast.humidity}
+                iconUrl={dayForecast.iconUrl}
+              />
+            ))}
+          </section>
         </>
       ) : null}
     </>
