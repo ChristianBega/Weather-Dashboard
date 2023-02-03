@@ -3,8 +3,3 @@ body {
   background: linear-gradient(180deg, rgba(75, 48, 217, 0.7357317927170868) 26%, rgba(186, 0, 255, 0.6797093837535014) 84%);
   min-height: 100vh;
 }
-.card {
-  min-width: 15rem;
-  height: 20rem;
-  background-color: none;
-}
