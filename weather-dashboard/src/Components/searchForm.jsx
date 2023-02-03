@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { fetchCoordinates, fetchWeather } from "../Utils/fetchCalls";
 import WeatherDisplay from "./weatherDisplay";
 
 export default function SearchForm() {
-  const [userSearch, setUserSearch] = useState({ city: "" });
+  // Tracking user input state- initial state is is object = {city : ""}
+  const [userSearch, setUserSearch] = useState("");
+  // Tracking boolean state for submitting
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // console.log(isSubmitted);
-
+  // Handle change function - setting user search state from input value
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUserSearch({ ...userSearch, [name]: value });
+    const test = event.target.value;
+    setUserSearch(test);
+    // console.log("User Search Line 14 (searchForm)", userSearch); // return should be === userInput = Denver
   };
 
   const handleSubmit = (event) => {
@@ -18,9 +19,12 @@ export default function SearchForm() {
 
     try {
       setUserSearch(userSearch);
+      // console.log("User Search Line 22 (searchForm)", userSearch); // return should be === line 14 userInput
     } catch (error) {
       console.error(error);
     }
+    setUserSearch("");
+    // console.log("User Search Line 22 (searchForm)", userSearch); // return should be === ""
   };
 
   return (
@@ -34,14 +38,14 @@ export default function SearchForm() {
         <input
           name="city"
           onChange={handleChange}
-          value={userSearch.city}
+          value={userSearch}
           className="w-5/6 mb-10 p-3 rounded-md bg-neutral-500 placeholder-white"
           placeholder="Search for a city..."
           type="text"
           aria-describedby="userInput"
         />
         <button
-          onClick={() => (isSubmitted === false ? setIsSubmitted(true) : null)}
+          onClick={() => (isSubmitted === false ? setIsSubmitted(true) && setUserSearch("") : null)}
           type="submit"
           className="w-5/6 py-3 text-base  rounded-md bg-green-600 shadow-lg  hover:shadow-green-400/30"
         >
@@ -59,7 +63,7 @@ export default function SearchForm() {
           Coming soon
         </div>
       </form>
-      {isSubmitted ? <WeatherDisplay userSearch={userSearch} isSubmitted={isSubmitted} /> : <WeatherDisplay isSubmitted={false} />}
+      {isSubmitted ? <WeatherDisplay userSearch={userSearch} isSubmitted={isSubmitted} /> : <WeatherDisplay userSearch="" isSubmitted={false} />}
     </>
   );
 }
