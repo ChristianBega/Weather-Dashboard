@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function SearchForm() {
@@ -20,6 +20,13 @@ export default function SearchForm() {
     //   console.error(error);
     // }
   };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log("This will run after 2 second after the form submission. And will clear the input");
+      setUserSearch("");
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [handleSubmit]);
 
   return (
     <>
