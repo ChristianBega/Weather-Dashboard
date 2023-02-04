@@ -1,47 +1,26 @@
-import React, { useEffect, useState } from "react";
-import WeatherDisplay from "./weatherDisplay";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function SearchForm() {
   // Tracking user input state- initial state is is object = {city : ""}
   const [userSearch, setUserSearch] = useState("");
-  // Tracking boolean state for submitting
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Handle change function - setting user search state from input value
   const handleChange = (event) => {
-    const test = event.target.value;
-    setUserSearch(test);
+    const userInput = event.target.value;
+    setUserSearch(userInput);
     // console.log("User Search Line 14 (searchForm)", userSearch); // return should be === userInput = Denver
   };
 
   const handleSubmit = (event) => {
-    console.log("Test");
     event.preventDefault();
-
-    try {
-      setUserSearch(userSearch);
-      if (isSubmitted === false) {
-        setIsSubmitted(true);
-        // setUserSearch("");
-      } else {
-        setIsSubmitted(false);
-        setUserSearch("");
-      }
-
-      // console.log("User Search Line 22 (searchForm)", userSearch); // return should be === line 14 userInput
-    } catch (error) {
-      console.error(error);
-    }
-
-    // console.log("User Search Line 22 (searchForm)", userSearch); // return should be === ""
+    setUserSearch(userSearch);
+    // try {
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      console.log("This will run after 2 second!");
-      setUserSearch("");
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [isSubmitted]);
+
   return (
     <>
       <form
@@ -61,18 +40,25 @@ export default function SearchForm() {
         />
         {/* Submit button */}
         <button type="submit" className="w-5/6 md:w-1/2 py-3 text-base  rounded-md bg-green-600 shadow-lg  hover:shadow-green-400/30">
-          Submit
+          {/* Passing userSearch state as prop to /weatherdisplay link */}
+          <Link
+            to="/weatherdisplay"
+            state={{
+              userSearch: userSearch,
+            }}
+          >
+            Submit
+          </Link>
         </button>
 
-        <button className="w-5/6 md:w-1/2 my-3 py-3 rounded-md bg-red-600 shadow-lg hover:shadow-red-400/30" id="clear-btn">
-          Clear
+        <button type="submit" className="w-5/6 md:w-1/2 my-3 py-3 rounded-md bg-red-600 shadow-lg hover:shadow-red-400/30" id="clear-btn">
+          <Link to="/">Clear</Link>
         </button>
+
         <div id="recent-btn-container" className="w-5/6 my-3 py-3 text-center rounded-md">
           Coming soon
         </div>
       </form>
-      {isSubmitted ? <WeatherDisplay userSearch={userSearch} isSubmitted={isSubmitted} /> : <WeatherDisplay userSearch="" isSubmitted={false} />}
-      {console.log(isSubmitted)}
     </>
   );
 }
