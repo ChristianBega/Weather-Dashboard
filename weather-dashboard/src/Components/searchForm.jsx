@@ -53,7 +53,7 @@ export default function SearchForm() {
         </button>
 
         <button type="submit" className="w-5/6 md:w-1/2 my-3 py-3 rounded-md bg-red-600 shadow-lg hover:shadow-red-400/30" id="clear-btn">
-          <Link to="/">Clear</Link>
+          <Link to="/Weather-Dashboard">Clear</Link>
         </button>
 
         <div id="recent-btn-container" className="w-5/6 my-3 py-3 text-center rounded-md">
