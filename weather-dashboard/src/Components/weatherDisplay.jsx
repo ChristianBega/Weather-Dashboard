@@ -103,7 +103,7 @@ export default function WeatherDisplay({ userSearch, isSubmitted }) {
 
             <p id="humidity">Humidity : {data.humidity} % </p>
           </section>
-          <section className="flex flex-col items-center md:flex-row md:justify-between gap-x-7 flex-wrap mb-10" id="card-container">
+          <section className="flex flex-col flex-wrap items-center justify-between md:flex-row  gap-x-3  mb-10" id="card-container">
             {data2.map((dayForecast, index) => (
               <Cards
                 isSubmitted={isSubmitted}
