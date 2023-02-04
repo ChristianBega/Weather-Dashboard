@@ -42,6 +42,7 @@ export default function SearchForm() {
         <button type="submit" className="w-5/6 md:w-1/2 py-3 text-base  rounded-md bg-green-600 shadow-lg  hover:shadow-green-400/30">
           {/* Passing userSearch state as prop to /weatherdisplay link */}
           <Link
+            //! resource on passing state through links : https://medium.com/frontendweb/how-to-pass-state-or-data-in-react-router-v6-c366db9ee2f4
             to="/weatherdisplay"
             state={{
               userSearch: userSearch,
