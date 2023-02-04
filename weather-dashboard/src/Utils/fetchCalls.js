@@ -11,10 +11,8 @@ const API = {
         return response.json();
       })
       .then(function (data) {
-        // let lat = data[0].lat;
-        // let lon = data[0].lon;
+        // console.log("Coordinates from response", data);
         return data;
-        // return [lat, lon];
       });
   },
   getWeather: (lat, lon) => {
@@ -24,7 +22,7 @@ const API = {
         return response.json();
       })
       .then(function (data) {
-        // console.log("data from response", data);
+        // console.log("Weather data from response", data);
         return data;
       });
   },

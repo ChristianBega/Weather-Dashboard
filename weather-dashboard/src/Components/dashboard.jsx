@@ -1,15 +1,13 @@
 import React from "react";
-import CardDisplay from "../Components/cards";
+import { Link } from "react-router-dom";
 import SearchForm from "../Components/searchForm";
-import WeatherDisplay from "../Components/weatherDisplay";
 
 export default function dashboard() {
   return (
     <>
-      <div className="container min-h-screen  mt-10">
+      <div className="container min-h-screen mt-10">
+        <Link to="/"></Link>
         <SearchForm />
-        <WeatherDisplay />
-        <CardDisplay />
       </div>
     </>
   );
