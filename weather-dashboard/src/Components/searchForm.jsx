@@ -37,7 +37,7 @@ export default function SearchForm() {
   };
   useEffect(() => {
     const timer = setTimeout(() => {
-      console.log("This will run after 1 second!");
+      console.log("This will run after 2 second!");
       setUserSearch("");
     }, 2000);
     return () => clearTimeout(timer);
