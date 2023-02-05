@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export default function SearchForm() {
   // Tracking user input state- initial state is is object = {city : ""}
   const [userSearch, setUserSearch] = useState("");
+  const [userPreviousSearch, setPreviousUserSearch] = useState([]);
 
   // Handle change function - setting user search state from input value
   const handleChange = (event) => {
@@ -11,20 +12,25 @@ export default function SearchForm() {
     setUserSearch(userInput);
     // console.log("User Search Line 14 (searchForm)", userSearch); // return should be === userInput = Denver
   };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     setUserSearch(userSearch);
-    // try {
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    // setPreviousUserSearch((userPreviousSearch) => [...userPreviousSearch, userSearch]);
+    // setTheArray((oldArray) => [...oldArray, `Entry ${oldArray.length}`]);
   };
+  const handleLocalStorage = () => {
+    if (userPreviousSearch.length >= 5) {
+      setPreviousUserSearch((userPreviousSearch) => userPreviousSearch.slice(1));
+    } else if (userPreviousSearch.length <= 5) {
+      setPreviousUserSearch((userPreviousSearch) => [...userPreviousSearch, userSearch]);
+    }
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      console.log("This will run after 2 second after the form submission. And will clear the input");
+      // console.log("This will run after 2 second after the form submission. And will clear the input");
       setUserSearch("");
-    }, 1000);
+    }, 1200);
     return () => clearTimeout(timer);
   }, [handleSubmit]);
 
@@ -46,7 +52,11 @@ export default function SearchForm() {
           aria-describedby="userInput"
         />
         {/* Submit button */}
-        <button type="submit" className="w-5/6 md:w-1/2 py-3 text-base  rounded-md bg-green-600 shadow-lg  hover:shadow-green-400/30">
+        <button
+          onClick={handleLocalStorage}
+          type="submit"
+          className="w-5/6 md:w-1/2 py-3 text-base  rounded-md bg-green-600 shadow-lg  hover:shadow-green-400/30"
+        >
           {/* Passing userSearch state as prop to /weatherdisplay link */}
           <Link
             //! resource on passing state through links : https://medium.com/frontendweb/how-to-pass-state-or-data-in-react-router-v6-c366db9ee2f4
