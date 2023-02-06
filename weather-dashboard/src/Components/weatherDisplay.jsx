@@ -6,8 +6,8 @@ import SearchForm from "./searchForm";
 
 export default function WeatherDisplay() {
   const location = useLocation();
-  const userSearch = location.state?.userSearch;
-  // console.log("User search input test : ", userSearch);
+  const currentSearch = location.state?.currentSearch;
+  // console.log("Current search input test : ", currentSearch);
 
   let [data, setData] = useState({ name: "", date: "", temp: 0, windSpeed: 0, humidity: 0, iconUrl: undefined });
 
@@ -80,8 +80,8 @@ export default function WeatherDisplay() {
       // console.log("City Weather Desc : ", responseCurrentWeather.list[0].weather[0].description);
       // console.log("Weather Icon : ", responseCurrentWeather.list[0].weather[0].icon);
     };
-    gettingCoords(userSearch);
-  }, [userSearch]);
+    gettingCoords(currentSearch);
+  }, [currentSearch]);
 
   return (
     <>
