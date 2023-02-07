@@ -6,17 +6,15 @@ import WeatherDisplay from "./Components/weatherDisplay";
 
 function App() {
   return (
-    <>
-      <Router>
-        <Navigation />
-        {/* <Dashboard /> */}
-        <Routes>
-          <Route exact path="/Weather-Dashboard" element={<Dashboard />}></Route>
-          <Route exact path="/weatherdisplay" element={<WeatherDisplay />}></Route>
-        </Routes>
-        <Navigation />
-      </Router>
-    </>
+    <Router>
+      <Navigation />
+      {/* <Dashboard /> */}
+      <Routes>
+        <Route exact path="/Weather-Dashboard" element={<Dashboard />}></Route>
+        <Route exact path="/weatherdisplay" element={<WeatherDisplay />}></Route>
+      </Routes>
+      <Navigation />
+    </Router>
   );
 }
 

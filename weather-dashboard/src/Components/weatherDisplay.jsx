@@ -6,8 +6,8 @@ import SearchForm from "./searchForm";
 
 export default function WeatherDisplay() {
   const location = useLocation();
-  const userSearch = location.state?.userSearch;
-  // console.log("User search input test : ", userSearch);
+  const currentSearch = location.state?.currentSearch;
+  // console.log("Current search input test : ", currentSearch);
 
   let [data, setData] = useState({ name: "", date: "", temp: 0, windSpeed: 0, humidity: 0, iconUrl: undefined });
 
@@ -34,7 +34,7 @@ export default function WeatherDisplay() {
         humidity: responseCurrentWeather.list[0].main.humidity,
         iconUrl: `https://openweathermap.org/img/wn/${responseCurrentWeather.list[0].weather[0].icon}.png`,
       });
-      // console.log("Data for current day forecast (Line 31)", data);
+      // console.log("Data for current day forecast (Line 37)", data);
 
       setData2([
         {
@@ -70,7 +70,7 @@ export default function WeatherDisplay() {
           iconUrl: `https://openweathermap.org/img/wn/${responseCurrentWeather.list[32].weather[0].icon}.png`,
         },
       ]);
-      // console.log("Data for 5 day forecast (Line 67)", data2);
+      console.log("Data for 5 day forecast (Line 67)", data2);
 
       // Extra data from Api for future development
       // console.log("City Feels Like : ", responseCurrentWeather.list[0].main.feels_like);
@@ -80,14 +80,14 @@ export default function WeatherDisplay() {
       // console.log("City Weather Desc : ", responseCurrentWeather.list[0].weather[0].description);
       // console.log("Weather Icon : ", responseCurrentWeather.list[0].weather[0].icon);
     };
-    gettingCoords(userSearch);
-  }, [userSearch]);
+    gettingCoords(currentSearch);
+  }, [currentSearch]);
 
   return (
     <>
       <div className="container min-h-screen mt-10">
         <Link to="/weatherdisplay"></Link>
-        <SearchForm></SearchForm>
+        <SearchForm />
         <section className="mt-10 p-8 flex flex-col gap-3 rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70" id="current-forecast">
           <h2 className=" my-4 text-4xl text-center">Current Forecast</h2>
           <div className="flex justify-start items-center">
@@ -97,6 +97,7 @@ export default function WeatherDisplay() {
 
             <span className="ml-5" id="date">
               {data.date}
+              {/* {new Intl.DateTimeFormat("en-us").format(data.date)}   */}
             </span>
             <img id="weather-icon" className="ml-5" src={data.iconUrl} alt="Weather Icon" />
           </div>
