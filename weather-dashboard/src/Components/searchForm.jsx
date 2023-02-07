@@ -54,6 +54,7 @@ export default function SearchForm() {
     <>
       <form onSubmit={handleSubmit} className="flex flex-col items-center rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70">
         <h2 className="py-3 my-4 text-4xl">Search for a City:</h2>
+        {/* User search input */}
         <input
           name="city"
           onChange={handleChange}
@@ -76,7 +77,7 @@ export default function SearchForm() {
             Submit
           </Link>
         </button>
-
+        {/* Clear button*/}
         <button
           onClick={handleClear}
           type="reset"
@@ -85,6 +86,7 @@ export default function SearchForm() {
         >
           <Link to="/Weather-Dashboard">Clear</Link>
         </button>
+        {/* Recent search buttons */}
         <div id="recent-btn-container" className="flex flex-col items-center w-full my-3 py-3 text-center rounded-md">
           {previousSearch.map((city, index) => (
             <button
@@ -92,12 +94,7 @@ export default function SearchForm() {
               className="w-5/6 md:w-1/2 my-2 py-3 rounded-md bg-neutral-500 shadow-lg hover:shadow-red-400/30"
               key={index}
             >
-              <Link
-                id={city}
-                //! resource on passing state through links : https://medium.com/frontendweb/how-to-pass-state-or-data-in-react-router-v6-c366db9ee2f4
-                to="/Weather-Display"
-                state={{ currentSearch: city }}
-              >
+              <Link id={city} to="/Weather-Display" state={{ currentSearch: city }}>
                 {city}
               </Link>
             </button>

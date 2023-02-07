@@ -2,20 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import API from "../Utils/fetchCalls";
 import Cards from "./cards";
-// import SearchForm from "./searchForm";
 import { ArrowSmLeftIcon } from "@heroicons/react/solid";
 
 export default function WeatherDisplay() {
+  // Access props passed from link state
   const location = useLocation();
   const currentSearch = location.state?.currentSearch;
-  // console.log("Current search input test : ", currentSearch);
 
+  // data1 - that will track the state of the current day forecast
   let [data, setData] = useState({ name: "", date: "", temp: 0, windSpeed: 0, humidity: 0, iconUrl: undefined });
 
-  // data2 - that will track the state of the next 5 days forecast an array of objects
+  // data2 - that will track the state of the next 4 days forecast
   let [data2, setData2] = useState([{ name: "", date: "", temp: 0, windSpeed: 0, humidity: 0, iconUrl: undefined }]);
-
-  // Creating use state to track lat and lon state
 
   useEffect(() => {
     let lat, lon;
@@ -25,8 +23,8 @@ export default function WeatherDisplay() {
       lat = responseCoords[0].lat;
       lon = responseCoords[0].lon;
       const responseCurrentWeather = await API.getWeather(lat, lon);
-      // console.log("Latitude and longitude : "lat, lon);
-      // console.log("Current Weather response", responseCurrentWeather);
+
+      // Setting current day forecast state
       setData({
         name: responseCurrentWeather.city.name,
         date: responseCurrentWeather.list[0].dt_txt,
@@ -35,8 +33,7 @@ export default function WeatherDisplay() {
         humidity: responseCurrentWeather.list[0].main.humidity,
         iconUrl: `https://openweathermap.org/img/wn/${responseCurrentWeather.list[0].weather[0].icon}.png`,
       });
-      // console.log("Data for current day forecast (Line 37)", data);
-
+      // Setting four day forecast state
       setData2([
         {
           name: responseCurrentWeather.city.name,
@@ -71,15 +68,6 @@ export default function WeatherDisplay() {
           iconUrl: `https://openweathermap.org/img/wn/${responseCurrentWeather.list[32].weather[0].icon}.png`,
         },
       ]);
-      // console.log("Data for 5 day forecast (Line 67)", data2);
-
-      // Extra data from Api for future development
-      // console.log("City Feels Like : ", responseCurrentWeather.list[0].main.feels_like);
-      // console.log("City Min Temp : ", responseCurrentWeather.list[0].main.temp_min);
-      // console.log("City Max Temp : ", responseCurrentWeather.list[0].main.temp_max);
-      // console.log("City Weather : ", responseCurrentWeather.list[0].weather[0].main);
-      // console.log("City Weather Desc : ", responseCurrentWeather.list[0].weather[0].description);
-      // console.log("Weather Icon : ", responseCurrentWeather.list[0].weather[0].icon);
     };
     gettingCoords(currentSearch);
   }, [currentSearch]);
@@ -88,7 +76,6 @@ export default function WeatherDisplay() {
     <>
       <div className="container min-h-screen mt-10">
         <Link to="/Weather-Display"></Link>
-        {/* <SearchForm /> */}
         <Link to="/Weather-Dashboard">
           <ArrowSmLeftIcon className="h-6 w-6 text-white" />
         </Link>
@@ -101,7 +88,6 @@ export default function WeatherDisplay() {
 
             <span className="ml-5" id="date">
               {data.date}
-              {/* {new Intl.DateTimeFormat("en-us").format(data.date)}   */}
             </span>
             <img id="weather-icon" className="ml-5" src={data.iconUrl} alt="Weather Icon" />
           </div>
