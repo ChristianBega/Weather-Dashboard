@@ -13,12 +13,11 @@ export default function SearchForm() {
   // Responsible for input change events
   const handleChange = (event) => {
     setCurrentSearch(event.target.value);
-    // console.log("Current Search Line 14 (searchForm)", currentSearch); // return should be === currentInput = Denver
   };
 
   // Responsible for submit events
   const handleSubmit = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     if (currentSearch) {
       setCurrentSearch(currentSearch);
       setPreviousSearch(JSON.parse(localStorage.getItem("city") || "[]"));
