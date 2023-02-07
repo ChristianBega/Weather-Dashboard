@@ -11,7 +11,7 @@ function App() {
       {/* <Dashboard /> */}
       <Routes>
         <Route exact path="/Weather-Dashboard" element={<Dashboard />}></Route>
-        <Route exact path="/weatherdisplay" element={<WeatherDisplay />}></Route>
+        <Route exact path="/Weather-Display" element={<WeatherDisplay />}></Route>
       </Routes>
       <Navigation />
     </Router>
