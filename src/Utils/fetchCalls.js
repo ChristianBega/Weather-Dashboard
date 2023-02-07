@@ -16,7 +16,7 @@ const API = {
       });
   },
   getWeather: (lat, lon) => {
-    var apiCall = weatherApi + "lat=" + lat + "&lon=" + lon + "&units=imperial&" + "appid=" + apiKey;
+    var apiCall = weatherApi + "lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + apiKey;
     return fetch(apiCall)
       .then(function (response) {
         return response.json();

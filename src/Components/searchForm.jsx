@@ -43,7 +43,7 @@ export default function SearchForm() {
       return;
     }
     localStorage.setItem("city", JSON.stringify([...previousSearch, currentSearch]));
-  }, [handleSubmit]);
+  }, [currentSearch, previousSearch]);
 
   // Executes on page load - responsible for getting local storage items, so recent search buttons can render.
   useEffect(() => {

@@ -10,7 +10,7 @@ export default function Cards({ index, name, date, temp, wind, humidity, iconUrl
         <div className="card-body text-white bg-dark rounded">
           <p className="fw-bold fs-4">{name}</p>
           <p className="fw-bold fs-4">{date}</p>
-          <img src={iconUrl}></img>
+          <img src={iconUrl} alt="weather icon"></img>
           <p>Temp: {temp} </p>
           <p>Wind: {wind} MPH</p>
           <p>Humidity: {humidity} %</p>
