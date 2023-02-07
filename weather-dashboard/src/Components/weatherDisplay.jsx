@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import API from "../Utils/fetchCalls";
 import Cards from "./cards";
 // import SearchForm from "./searchForm";
+import { ArrowSmLeftIcon } from "@heroicons/react/solid";
 
 export default function WeatherDisplay() {
   const location = useLocation();
@@ -88,7 +89,9 @@ export default function WeatherDisplay() {
       <div className="container min-h-screen mt-10">
         <Link to="/Weather-Display"></Link>
         {/* <SearchForm /> */}
-        <Link to="/Weather-Dashboard">Back button</Link>
+        <Link to="/Weather-Dashboard">
+          <ArrowSmLeftIcon className="h-6 w-6 text-white" />
+        </Link>
         <section className="mt-10 p-8 flex flex-col gap-3 rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70" id="current-forecast">
           <h2 className=" my-4 text-4xl text-center">Current Forecast</h2>
           <div className="flex justify-start items-center">
