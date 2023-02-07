@@ -76,7 +76,7 @@ export default function WeatherDisplay() {
     <>
       <div className="container min-h-screen mt-10">
         <Link to="/Weather-Display"></Link>
-        <Link to="/Weather-Dashboard">
+        <Link to="/">
           <ArrowSmLeftIcon className="h-6 w-6 text-white" />
         </Link>
         <section className="mt-10 p-8 flex flex-col gap-3 rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70" id="current-forecast">
