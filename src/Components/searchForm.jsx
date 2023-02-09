@@ -65,39 +65,37 @@ export default function SearchForm() {
           aria-describedby="userInput"
         />
         {/* Submit button */}
-        <button type="submit" className="w-5/6 md:w-1/2 py-3 text-base  rounded-md bg-green-600 shadow-lg  hover:shadow-green-400/30">
-          {/* Passing currentSearch state as prop to /Weather-Display link */}
-          <Link
-            //! resource on passing state through links : https://medium.com/frontendweb/how-to-pass-state-or-data-in-react-router-v6-c366db9ee2f4
-            to="/Weather-Display"
-            state={{
-              currentSearch: currentSearch,
-            }}
-          >
-            Submit
-          </Link>
-        </button>
-        {/* Clear button*/}
-        <button
-          onClick={handleClear}
-          type="reset"
-          className="w-5/6 md:w-1/2 my-3 py-3 rounded-md bg-red-600 shadow-lg hover:shadow-red-400/30"
-          id="clear-btn"
+        <Link
+          //! resource on passing state through links : https://medium.com/frontendweb/how-to-pass-state-or-data-in-react-router-v6-c366db9ee2f4
+          className="w-5/6 md:w-1/2 py-3 text-base  rounded-md bg-green-600 shadow-lg  hover:shadow-green-400/30"
+          to="/Weather-Display"
+          state={{
+            currentSearch: currentSearch,
+          }}
         >
-          <Link to="/">Clear</Link>
-        </button>
+          {" "}
+          <button className="text-center w-full" type="submit">
+            {/* Passing currentSearch state as prop to /Weather-Display link */}
+            Submit
+          </button>
+        </Link>
+        {/* Clear button*/}
+        <Link to="/" className="w-5/6 md:w-1/2 my-3 py-3 rounded-md bg-red-600 shadow-lg hover:shadow-red-400/30">
+          <button onClick={handleClear} className="text-center w-full" type="reset" id="clear-btn">
+            Clear
+          </button>
+        </Link>
         {/* Recent search buttons */}
         <div id="recent-btn-container" className="flex flex-col items-center w-full my-3 py-3 text-center rounded-md">
           {previousSearch.map((city, index) => (
-            <button
-              onClick={handleSubmit}
+            <Link
+              to="/Weather-Display"
               className="w-5/6 md:w-1/2 my-2 py-3 rounded-md bg-neutral-500 shadow-lg hover:shadow-red-400/30"
               key={index}
+              state={{ currentSearch: city }}
             >
-              <Link id={city} to="/Weather-Display" state={{ currentSearch: city }}>
-                {city}
-              </Link>
-            </button>
+              {city}
+            </Link>
           ))}
         </div>
       </form>
