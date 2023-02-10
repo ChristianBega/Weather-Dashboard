@@ -127,27 +127,31 @@ export default function WeatherDisplay() {
         <Link to="/">
           <ArrowSmLeftIcon className="h-6 w-6 text-white" />
         </Link>
-        <motion.section
-          variants={recentSearchesVariant}
-          className="mt-10 p-8 flex flex-col gap-3 rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70"
-          id="current-forecast"
-        >
-          <h2 className=" my-4 text-4xl text-center">Current Forecast</h2>
-          <div className="flex justify-start items-center">
-            <h3 className="text-white" id="city-name">
-              {data.name}
-            </h3>
+        {data.name ? (
+          <motion.section
+            variants={recentSearchesVariant}
+            className="mt-10 p-8 flex flex-col gap-3 rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70"
+            id="current-forecast"
+          >
+            <h2 className=" my-4 text-4xl text-center">Current Forecast</h2>
+            <div className="flex justify-start items-center">
+              <h3 className="text-white" id="city-name">
+                {data.name}
+              </h3>
 
-            <span className="ml-5" id="date">
-              {data.date}
-            </span>
-            <img id="weather-icon" className="ml-5" src={data.iconUrl} alt="Weather Icon" />
-          </div>
-          <p id="temperature">Temp : {data.temp} degrees </p>
-          <p id="wind">Temp : {data.wind} Mph </p>
+              <span className="ml-5" id="date">
+                {data.date}
+              </span>
+              <img id="weather-icon" className="ml-5" src={data.iconUrl} alt="Weather Icon" />
+            </div>
+            <p id="temperature">Temp : {data.temp} degrees </p>
+            <p id="wind">Temp : {data.wind} Mph </p>
 
-          <p id="humidity">Humidity : {data.humidity} % </p>
-        </motion.section>
+            <p id="humidity">Humidity : {data.humidity} % </p>
+          </motion.section>
+        ) : (
+          "loading..........."
+        )}
 
         <motion.section
           variants={recentSearchesVariant}

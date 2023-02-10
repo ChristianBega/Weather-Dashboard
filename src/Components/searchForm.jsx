@@ -25,11 +25,13 @@ export default function SearchForm() {
     event.preventDefault();
     if (currentSearch) {
       setCurrentSearch(currentSearch);
-      async function addCity(city) {
-        // Do not update local-storage, instead update state to rerender components
-        await setPreviousSearch((city) => previousSearch.push(city));
-      }
-      addCity(currentSearch);
+
+      // Messing around with trying to update state to reflect local storage changes.
+      // async function addCity(city) {
+      //   // Do not update local-storage, instead update state to rerender components
+      //   await setPreviousSearch((city) => previousSearch.push(city));
+      // }
+      // addCity(currentSearch);
     } else {
       console.log("Please provide a valid search...");
       return;
