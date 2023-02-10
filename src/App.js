@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Dashboard from "./Components/dashboard.jsx";
 import Navigation from "./Components/navigation";
