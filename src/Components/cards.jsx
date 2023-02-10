@@ -1,5 +1,6 @@
 import React from "react";
-
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 export default function Cards({ index, name, date, temp, wind, humidity, iconUrl }) {
   return (
     <>
@@ -10,10 +11,12 @@ export default function Cards({ index, name, date, temp, wind, humidity, iconUrl
         <div className="card-body text-white bg-dark rounded">
           <p className="fw-bold fs-4">{name}</p>
           <p className="fw-bold fs-4">{date}</p>
-          <img src={iconUrl} alt="weather icon"></img>
-          <p>Temp: {temp} </p>
-          <p>Wind: {wind} MPH</p>
-          <p>Humidity: {humidity} %</p>
+          {/* <img src={iconUrl} alt="weather icon"></img> */}
+          {iconUrl ? <img id="weather-icon" className="" src={iconUrl} alt="Weather Icon" /> : <Skeleton />}
+
+          <p>{temp} </p>
+          <p>{wind}</p>
+          <p>{humidity} </p>
         </div>
       </div>
     </>

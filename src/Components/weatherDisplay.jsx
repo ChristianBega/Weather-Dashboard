@@ -4,52 +4,30 @@ import API from "../Utils/fetchCalls";
 import Cards from "./cards";
 import { ArrowSmLeftIcon } from "@heroicons/react/solid";
 
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 // Framer motion
 import { motion } from "framer-motion";
 
 const weatherDisplayVariants = {
   hidden: {
-    when: "beforeChildren",
     y: "100vh",
-  },
-  visible: {
-    y: 0,
-    transition: {
-      duration: 0.3,
-      type: "spring",
-      stiffness: 35,
-      velocity: 200,
-      damping: 12,
-      ease: "easeIn",
-      when: "beforeChildren", //use this instead of delay
-      staggerChildren: 0.1, //apply stagger on the parent tag
-    },
-  },
-
-  exit: {
-    when: "afterChildren",
-    x: "-100vw",
-    transition: { ease: "easeInOut" },
-  },
-};
-const recentSearchesVariant = {
-  hidden: {
-    y: "100vh", //move out of the site
     opacity: 0,
   },
   visible: {
-    y: 0, // bring it back to nrmal
     opacity: 1,
+    y: 0,
     transition: {
-      duration: 0.4,
       type: "spring",
-      stiffness: 35,
-      velocity: 200,
-      damping: 12,
-      ease: "easeIn",
-      when: "beforeChildren", //use this instead of delay
-      staggerChildren: 0.2, //apply stagger on the parent tag
+      delay: 0.5,
+      stiffness: 45,
+      damping: 10,
     },
+  },
+  exit: {
+    x: "-100vw",
+    transition: { ease: "easeOut", stiffness: 75, damping: 8 },
   },
 };
 
@@ -127,45 +105,35 @@ export default function WeatherDisplay() {
         <Link to="/">
           <ArrowSmLeftIcon className="h-6 w-6 text-white" />
         </Link>
-        {data.name ? (
-          <motion.section
-            variants={recentSearchesVariant}
-            className="mt-10 p-8 flex flex-col gap-3 rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70"
-            id="current-forecast"
-          >
-            <h2 className=" my-4 text-4xl text-center">Current Forecast</h2>
-            <div className="flex justify-start items-center">
-              <h3 className="text-white" id="city-name">
-                {data.name}
-              </h3>
-
-              <span className="ml-5" id="date">
-                {data.date}
-              </span>
-              <img id="weather-icon" className="ml-5" src={data.iconUrl} alt="Weather Icon" />
-            </div>
-            <p id="temperature">Temp : {data.temp} degrees </p>
-            <p id="wind">Temp : {data.wind} Mph </p>
-
-            <p id="humidity">Humidity : {data.humidity} % </p>
-          </motion.section>
-        ) : (
-          "loading..........."
-        )}
-
         <motion.section
-          variants={recentSearchesVariant}
-          className="flex flex-col flex-wrap items-center justify-between md:flex-row  gap-x-3  mb-10"
-          id="card-container"
+          className="mt-10 p-8 flex flex-col gap-3 rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70"
+          id="current-forecast"
         >
+          <h2 className=" my-4 text-4xl text-center">Current Forecast</h2>
+          <div className="flex justify-start items-center">
+            <h3 className="text-white" id="city-name">
+              {data.name ? data.name : <Skeleton />}
+            </h3>
+
+            <span className="ml-5" id="date">
+              {data.date ? data.date : <Skeleton />}
+            </span>
+
+            {data.iconUrl ? <img id="weather-icon" className="ml-5" src={data.iconUrl} alt="Weather Icon" /> : <Skeleton circle />}
+          </div>
+          <p id="temperature"> {data.temp ? `Temp: ${data.temp} \u00b0` : <Skeleton />} </p>
+          <p id="wind"> {data.wind ? `Wind: ${data.wind} Mph` : <Skeleton />} </p>
+          <p id="humidity">{data.humidity ? `Humidity : ${data.humidity}%` : <Skeleton />} </p>
+        </motion.section>
+        <motion.section className="flex flex-col flex-wrap items-center justify-between md:flex-row  gap-x-3  mb-10" id="card-container">
           {data2.map((dayForecast, index) => (
             <Cards
               key={index}
-              name={dayForecast.name}
-              date={dayForecast.date}
-              temp={dayForecast.temp}
-              wind={dayForecast.wind}
-              humidity={dayForecast.humidity}
+              name={dayForecast.name ? dayForecast.name : <Skeleton />}
+              date={dayForecast.date ? dayForecast.date : <Skeleton />}
+              temp={dayForecast.temp ? `${dayForecast.temp} \u00b0` : <Skeleton />}
+              wind={dayForecast.wind ? `${dayForecast.wind} Mph` : <Skeleton />}
+              humidity={dayForecast.humidity ? `${dayForecast.humidity}%` : <Skeleton />}
               iconUrl={dayForecast.iconUrl}
             />
           ))}
