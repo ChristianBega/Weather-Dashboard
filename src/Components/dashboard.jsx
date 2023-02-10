@@ -28,7 +28,6 @@ const dashboardVariants = {
 export default function dashboard() {
   return (
     <>
-      {/* variants={dashboardVariants} initial="hidden" animate="visible" exit="exit" */}
       <motion.div variants={dashboardVariants} initial="hidden" animate="visible" exit="exit" className="flex items-center container min-h-[85vh]">
         <Link to="/"></Link>
         <SearchForm />
