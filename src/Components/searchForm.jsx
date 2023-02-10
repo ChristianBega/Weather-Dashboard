@@ -54,7 +54,7 @@ export default function SearchForm() {
     <>
       <form
         onSubmit={handleSubmit}
-        className="w-full max-h-[500px] flex flex-col items-center rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70"
+        className="w-full min-h-[500px] max-h-[800px] flex flex-col items-center rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70"
       >
         <h2 className="py-3 my-10 text-4xl">Search for a City:</h2>
         {/* User search input */}
@@ -70,7 +70,7 @@ export default function SearchForm() {
         {/* Submit button */}
         <Link
           //! resource on passing state through links : https://medium.com/frontendweb/how-to-pass-state-or-data-in-react-router-v6-c366db9ee2f4
-          className="w-5/6 md:w-1/2 py-3 text-base  rounded-md bg-green-600 shadow-lg  hover:shadow-green-400/30"
+          className="w-5/6 md:w-1/2 py-3 text-base  rounded-md bg-green-600 shadow-lg hover:shadow-green-700/60 hover:bg-green-300/70"
           to="/Weather-Display"
           state={{
             currentSearch: currentSearch,
@@ -83,17 +83,17 @@ export default function SearchForm() {
           </button>
         </Link>
         {/* Clear button*/}
-        <Link to="/" className="w-5/6 md:w-1/2 my-3 py-3 rounded-md bg-red-600 shadow-lg hover:shadow-red-400/30">
+        <Link to="/" className="w-5/6 md:w-1/2 my-3 py-3 rounded-md bg-red-700 shadow-lg hover:shadow-red-700/50 hover:bg-red-400/70">
           <button onClick={handleClear} className="text-center w-full" type="reset" id="clear-btn">
             Clear
           </button>
         </Link>
         {/* Recent search buttons */}
-        <div id="recent-btn-container" className="flex flex-col items-center w-full my-3 py-3 text-center rounded-md">
+        <div id="recent-btn-container" className="flex flex-wrap justify-center gap-5 items-center w-5/6 my-3 py-3 text-center rounded-md">
           {previousSearch.map((city, index) => (
             <Link
               to="/Weather-Display"
-              className="w-5/6 md:w-1/2 my-2 py-3 rounded-md bg-neutral-500 shadow-lg hover:shadow-red-400/30"
+              className="w-1/4 my-2 py-3 rounded-full bg-neutral-500/50 shadow-lg hover:shadow-blue-900/50 hover:bg-slate-400/50"
               key={index}
               state={{ currentSearch: city }}
             >
