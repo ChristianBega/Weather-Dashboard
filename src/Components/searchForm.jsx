@@ -52,8 +52,11 @@ export default function SearchForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex flex-col items-center rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70">
-        <h2 className="py-3 my-4 text-4xl">Search for a City:</h2>
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-h-[500px] flex flex-col items-center rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70"
+      >
+        <h2 className="py-3 my-10 text-4xl">Search for a City:</h2>
         {/* User search input */}
         <input
           name="city"

@@ -7,34 +7,31 @@ import { motion } from "framer-motion";
 
 const dashboardVariants = {
   hidden: {
-    opacity: 0,
-    y: "-100vh",
+    when: "beforeChildren",
+    x: "100vw",
   },
   visible: {
-    opacity: 1,
-    y: 0,
+    x: 0,
     transition: {
-      when: "beforeChildren",
-      delay: 0.3,
-      duration: 0.5,
+      duration: 0.3,
       type: "spring",
-      stiffness: 200,
-      velocity: 1,
-      damping: 10,
-      ease: "easeInOut",
+      stiffness: 80,
+      velocity: 200,
+      damping: 12,
+      ease: "easeIn",
     },
   },
 
   exit: {
     when: "afterChildren",
     y: "-100vh",
-    transition: { ease: "easeInOut" },
+    transition: { type: "spring", stiffness: 80, velocity: 200, damping: 12, duration: 0.3, ease: "easeOut" },
   },
 };
 export default function dashboard() {
   return (
     <>
-      <motion.div variants={dashboardVariants} initial="hidden" animate="visible" exit="exit" className="container min-h-fit mt-10">
+      <motion.div variants={dashboardVariants} initial="hidden" animate="visible" exit="exit" className="flex items-center container min-h-[85vh]">
         <Link to="/"></Link>
         <SearchForm />
       </motion.div>

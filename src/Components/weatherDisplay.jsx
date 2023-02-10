@@ -9,27 +9,24 @@ import { motion } from "framer-motion";
 
 const weatherDisplayVariants = {
   hidden: {
-    opacity: 0,
-    y: "-100vh",
+    when: "beforeChildren",
+    y: "100vh",
   },
   visible: {
-    opacity: 1,
     y: 0,
     transition: {
-      when: "beforeChildren",
-      delay: 0.3,
-      duration: 0.5,
+      duration: 0.3,
       type: "spring",
-      stiffness: 200,
-      velocity: 1,
-      damping: 10,
-      ease: "easeInOut",
+      stiffness: 35,
+      velocity: 200,
+      damping: 12,
+      ease: "easeIn",
     },
   },
 
   exit: {
     when: "afterChildren",
-    y: "-100vh",
+    x: "-100vw",
     transition: { ease: "easeInOut" },
   },
 };

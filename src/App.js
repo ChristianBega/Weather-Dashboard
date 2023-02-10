@@ -8,7 +8,7 @@ import WeatherDisplay from "./Components/weatherDisplay";
 function App() {
   const location = useLocation();
   return (
-    <AnimatePresence>
+    <AnimatePresence exitBeforeEnter={true}>
       {/* <Router location={location} key={location.pathname}></Router> */}
       <Navigation />
       {/* <Dashboard /> */}
