@@ -21,6 +21,8 @@ const weatherDisplayVariants = {
       velocity: 200,
       damping: 12,
       ease: "easeIn",
+      when: "beforeChildren", //use this instead of delay
+      staggerChildren: 0.1, //apply stagger on the parent tag
     },
   },
 
@@ -28,6 +30,26 @@ const weatherDisplayVariants = {
     when: "afterChildren",
     x: "-100vw",
     transition: { ease: "easeInOut" },
+  },
+};
+const recentSearchesVariant = {
+  hidden: {
+    y: "100vh", //move out of the site
+    opacity: 0,
+  },
+  visible: {
+    y: 0, // bring it back to nrmal
+    opacity: 1,
+    transition: {
+      duration: 0.4,
+      type: "spring",
+      stiffness: 35,
+      velocity: 200,
+      damping: 12,
+      ease: "easeIn",
+      when: "beforeChildren", //use this instead of delay
+      staggerChildren: 0.2, //apply stagger on the parent tag
+    },
   },
 };
 
@@ -102,11 +124,14 @@ export default function WeatherDisplay() {
   return (
     <>
       <motion.div variants={weatherDisplayVariants} initial="hidden" animate="visible" exit="exit" className="container min-h-screen mt-10">
-        <Link to="/Weather-Display"></Link>
         <Link to="/">
           <ArrowSmLeftIcon className="h-6 w-6 text-white" />
         </Link>
-        <section className="mt-10 p-8 flex flex-col gap-3 rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70" id="current-forecast">
+        <motion.section
+          variants={recentSearchesVariant}
+          className="mt-10 p-8 flex flex-col gap-3 rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70"
+          id="current-forecast"
+        >
           <h2 className=" my-4 text-4xl text-center">Current Forecast</h2>
           <div className="flex justify-start items-center">
             <h3 className="text-white" id="city-name">
@@ -122,8 +147,13 @@ export default function WeatherDisplay() {
           <p id="wind">Temp : {data.wind} Mph </p>
 
           <p id="humidity">Humidity : {data.humidity} % </p>
-        </section>
-        <section className="flex flex-col flex-wrap items-center justify-between md:flex-row  gap-x-3  mb-10" id="card-container">
+        </motion.section>
+
+        <motion.section
+          variants={recentSearchesVariant}
+          className="flex flex-col flex-wrap items-center justify-between md:flex-row  gap-x-3  mb-10"
+          id="card-container"
+        >
           {data2.map((dayForecast, index) => (
             <Cards
               key={index}
@@ -135,7 +165,7 @@ export default function WeatherDisplay() {
               iconUrl={dayForecast.iconUrl}
             />
           ))}
-        </section>
+        </motion.section>
       </motion.div>
     </>
   );

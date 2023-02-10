@@ -1,9 +1,13 @@
 import React from "react";
 
+import { motion } from "framer-motion";
+
 export default function Cards({ index, name, date, temp, wind, humidity, iconUrl }) {
   return (
     <>
-      <div
+      <motion.div
+        initial="hidden"
+        animate="visible"
         key={index}
         className="w-full md:w-40 lg:w-48 xl:w-72 h-56 mt-10 xl:p-8 p-4 rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70"
       >
@@ -15,7 +19,7 @@ export default function Cards({ index, name, date, temp, wind, humidity, iconUrl
           <p>Wind: {wind} MPH</p>
           <p>Humidity: {humidity} %</p>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }
