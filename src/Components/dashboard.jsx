@@ -14,7 +14,7 @@ const dashboardVariants = {
     x: 0,
     transition: {
       type: "spring",
-      delay: 0.5,
+      delay: 0.2,
       stiffness: 45,
       damping: 10,
     },
