@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import API from "../Utils/fetchCalls";
 import Cards from "./cards";
 import { ArrowSmLeftIcon } from "@heroicons/react/solid";
+import { format, parseISO } from "date-fns";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -31,27 +32,31 @@ const weatherDisplayVariants = {
   },
 };
 
+const formatDate = (date) => {
+  return format(parseISO(date), "MMM-dd-yyyy").split("-").join(" ");
+};
+
 export default function WeatherDisplay() {
   // Access props passed from link state
   const location = useLocation();
   const currentSearch = location.state?.currentSearch;
 
   // data1 - that will track the state of the current day forecast
-  let [data, setData] = useState({ name: "", date: "", temp: 0, windSpeed: 0, humidity: 0, iconUrl: undefined });
+  let [data, setData] = useState({ name: "", date: 0, temp: 0, windSpeed: 0, humidity: 0, iconUrl: undefined });
 
   // data2 - that will track the state of the next 4 days forecast
-  let [data2, setData2] = useState([{ name: "", date: "", temp: 0, windSpeed: 0, humidity: 0, iconUrl: undefined }]);
+  let [data2, setData2] = useState([{ name: "", date: 0, temp: 0, windSpeed: 0, humidity: 0, iconUrl: undefined }]);
 
   useEffect(() => {
     let lat, lon;
     const gettingCoords = async (query) => {
       let responseCoords = await API.getCoordinates(query);
-      // console.log("Coordinates Response :", responseCoords[0].lat, responseCoords[0].lon);
       lat = responseCoords[0].lat;
       lon = responseCoords[0].lon;
       const responseCurrentWeather = await API.getWeather(lat, lon);
 
       // Setting current day forecast state
+
       setData({
         name: responseCurrentWeather.city.name,
         date: responseCurrentWeather.list[0].dt_txt,
@@ -116,7 +121,7 @@ export default function WeatherDisplay() {
             </h3>
 
             <span className="ml-5" id="date">
-              {data.date ? data.date : <Skeleton />}
+              {data.date ? formatDate(data.date) : <Skeleton />}
             </span>
 
             {data.iconUrl ? <img id="weather-icon" className="ml-5" src={data.iconUrl} alt="Weather Icon" /> : <Skeleton circle />}
@@ -130,7 +135,7 @@ export default function WeatherDisplay() {
             <Cards
               key={index}
               name={dayForecast.name ? dayForecast.name : <Skeleton />}
-              date={dayForecast.date ? dayForecast.date : <Skeleton />}
+              date={dayForecast.date ? formatDate(dayForecast.date) : <Skeleton />}
               temp={dayForecast.temp ? `${dayForecast.temp} \u00b0` : <Skeleton />}
               wind={dayForecast.wind ? `${dayForecast.wind} Mph` : <Skeleton />}
               humidity={dayForecast.humidity ? `${dayForecast.humidity}%` : <Skeleton />}
@@ -142,3 +147,5 @@ export default function WeatherDisplay() {
     </>
   );
 }
+
+// Date formatting reference - https://stackoverflow.com/questions/64362242/how-to-format-date-with-date-fns
