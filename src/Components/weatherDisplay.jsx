@@ -53,6 +53,7 @@ export default function WeatherDisplay() {
       let responseCoords = await API.getCoordinates(query);
       lat = responseCoords[0].lat;
       lon = responseCoords[0].lon;
+      console.log(lat, lon);
       const responseCurrentWeather = await API.getWeather(lat, lon);
 
       // Setting current day forecast state
