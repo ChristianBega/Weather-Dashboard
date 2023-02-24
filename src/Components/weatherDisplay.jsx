@@ -48,7 +48,7 @@ export default function WeatherDisplay() {
 
   // data1 - that will track the state of the current day forecast
   let [data, setData] = useState({ name: "", date: 0, temp: 0, windSpeed: 0, humidity: 0, iconUrl: undefined });
-  let lat, lon;
+  // let lat, lon;
 
   // data2 - that will track the state of the next 4 days forecast
   let [data2, setData2] = useState([{ name: "", date: 0, temp: 0, windSpeed: 0, humidity: 0, iconUrl: undefined }]);
@@ -56,11 +56,11 @@ export default function WeatherDisplay() {
   useEffect(() => {
     const gettingCoords = async (query) => {
       let responseCoords = await API.getCoordinates(query);
-      lat = responseCoords[0].lat;
-      lon = responseCoords[0].lon;
-      setCurrentLatitude(lat);
-      setCurrentLongitude(lon);
-      const responseCurrentWeather = await API.getWeather(lat, lon);
+      // lat = responseCoords[0].lat;
+      // lon = responseCoords[0].lon;
+      setCurrentLatitude(responseCoords[0].lat);
+      setCurrentLongitude(responseCoords[0].lon);
+      const responseCurrentWeather = await API.getWeather(responseCoords[0].lat, responseCoords[0].lon);
 
       // Setting current day forecast state
 
@@ -110,7 +110,6 @@ export default function WeatherDisplay() {
     };
     gettingCoords(currentSearch);
   }, [currentSearch]);
-  // console.log(currentLatitude);
 
   return (
     <>
