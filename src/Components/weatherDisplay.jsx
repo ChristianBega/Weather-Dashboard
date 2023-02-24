@@ -10,6 +10,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 // Framer motion
 import { motion } from "framer-motion";
+import GoogleMaps from "./GoogleMap";
 
 const weatherDisplayVariants = {
   hidden: {
@@ -40,20 +41,25 @@ export default function WeatherDisplay() {
   // Access props passed from link state
   const location = useLocation();
   const currentSearch = location.state?.currentSearch;
+  // const currentLatitude = location.state?.latitude;
+  // const currentLongitude = location.state?.longitude;
+  const [currentLatitude, setCurrentLatitude] = useState();
+  const [currentLongitude, setCurrentLongitude] = useState();
 
   // data1 - that will track the state of the current day forecast
   let [data, setData] = useState({ name: "", date: 0, temp: 0, windSpeed: 0, humidity: 0, iconUrl: undefined });
+  let lat, lon;
 
   // data2 - that will track the state of the next 4 days forecast
   let [data2, setData2] = useState([{ name: "", date: 0, temp: 0, windSpeed: 0, humidity: 0, iconUrl: undefined }]);
 
   useEffect(() => {
-    let lat, lon;
     const gettingCoords = async (query) => {
       let responseCoords = await API.getCoordinates(query);
       lat = responseCoords[0].lat;
       lon = responseCoords[0].lon;
-      console.log(lat, lon);
+      setCurrentLatitude(lat);
+      setCurrentLongitude(lon);
       const responseCurrentWeather = await API.getWeather(lat, lon);
 
       // Setting current day forecast state
@@ -104,6 +110,7 @@ export default function WeatherDisplay() {
     };
     gettingCoords(currentSearch);
   }, [currentSearch]);
+  // console.log(currentLatitude);
 
   return (
     <>
@@ -112,25 +119,29 @@ export default function WeatherDisplay() {
           <ArrowSmLeftIcon className="h-6 w-6 text-white" />
         </Link>
         <motion.section
-          className="mt-10 p-8 flex flex-col gap-3 rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70"
+          className="mt-10 flex flex-col gap-3 rounded-md bg-neutral-800 text-white shadow-lg shadow-black/70 || sm:grid sm:grid-cols-2"
           id="current-forecast"
         >
-          <h2 className=" my-4 text-4xl text-center">Current Forecast</h2>
-          <div className="flex justify-start items-center">
-            <h3 className="text-white" id="city-name">
-              {data.name ? data.name : <Skeleton />}
-            </h3>
+          <div className="p-8">
+            <h2 className=" my-4 text-4xl text-center">Current Forecast</h2>
+            <div className="flex justify-start items-center">
+              <h3 className="text-white" id="city-name">
+                {data.name ? data.name : <Skeleton />}
+              </h3>
 
-            <span className="ml-5" id="date">
-              {data.date ? formatDate(data.date) : <Skeleton />}
-            </span>
+              <span className="ml-5" id="date">
+                {data.date ? formatDate(data.date) : <Skeleton />}
+              </span>
 
-            {data.iconUrl ? <img id="weather-icon" className="ml-5" src={data.iconUrl} alt="Weather Icon" /> : <Skeleton circle />}
+              {data.iconUrl ? <img id="weather-icon" className="ml-5" src={data.iconUrl} alt="Weather Icon" /> : <Skeleton circle />}
+            </div>
+            <p id="temperature"> {data.temp ? `Temp: ${data.temp} \u00b0` : <Skeleton />} </p>
+            <p id="wind"> {data.wind ? `Wind: ${data.wind} Mph` : <Skeleton />} </p>
+            <p id="humidity">{data.humidity ? `Humidity : ${data.humidity}%` : <Skeleton />} </p>
           </div>
-          <p id="temperature"> {data.temp ? `Temp: ${data.temp} \u00b0` : <Skeleton />} </p>
-          <p id="wind"> {data.wind ? `Wind: ${data.wind} Mph` : <Skeleton />} </p>
-          <p id="humidity">{data.humidity ? `Humidity : ${data.humidity}%` : <Skeleton />} </p>
+          <GoogleMaps className="" latitude={currentLatitude} longitude={currentLongitude} />
         </motion.section>
+
         <motion.section className="flex flex-col flex-wrap items-center justify-between md:flex-row  gap-x-3  mb-10" id="card-container">
           {data2.map((dayForecast, index) => (
             <Cards

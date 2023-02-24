@@ -1,19 +1,19 @@
-const { InjectManifest } = require("workbox-webpack-plugin");
+// const { InjectManifest } = require("workbox-webpack-plugin");
 
-module.exports = {
-  mode: "development",
-  entry: "./src/index.js",
-  output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"),
-  },
+// module.exports = {
+//   mode: "development",
+//   entry: "./src/index.js",
+//   output: {
+//     filename: "bundle.js",
+//     path: path.resolve(__dirname, "dist"),
+//   },
 
-  plugins: [
-    new InjectManifest({
-      swSrc: "./sw.js",
-      swDest: "service-worker.js",
-    }),
-  ],
+//   plugins: [
+//     new InjectManifest({
+//       swSrc: "./sw.js",
+//       swDest: "service-worker.js",
+//     }),
+//   ],
   // module: {
   //   rules: [
   //     {
