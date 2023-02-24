@@ -10,14 +10,14 @@ const API = {
     // Concat url end point with needed query parameters
     const apiCall = `${rootEndPoint}?q=${city}&appid=${apiKey}`;
     return axios.get(apiCall).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     });
   },
   getWeather: (lat, lon) => {
     const apiCall = `${weatherApi}lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
     return axios.get(apiCall).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     });
   },

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import API from "../Utils/fetchCalls";
+import API from "../Services/weatherAPI";
 import Cards from "./cards";
 import { ArrowSmLeftIcon } from "@heroicons/react/solid";
 import { format, parseISO } from "date-fns";

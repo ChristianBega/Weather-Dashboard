@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import GoogleMap from "./GoogleMap";
 
 export default function SearchForm() {
   const [currentSearch, setCurrentSearch] = useState("");
   const [previousSearch, setPreviousSearch] = useState([]);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+  const [status, setStatus] = useState(null);
 
   // Responsible for clearing local storage
   const handleClear = () => {
@@ -39,6 +43,20 @@ export default function SearchForm() {
     setCurrentSearch("");
   };
 
+  const getCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      setStatus("Geo location is not supported on your device :(");
+    } else {
+      setStatus("Loading...");
+
+      navigator.geolocation.getCurrentPosition((currentPosition) => {
+        setLatitude(currentPosition.coords.latitude);
+        setLongitude(currentPosition.coords.longitude);
+        setStatus("Complete!");
+      });
+    }
+  };
+
   // Executes on handleSubmit - responsible for setting previous and current local storage objects.
   useEffect(() => {
     if (currentSearch === "" || currentSearch === "null") {
@@ -49,6 +67,7 @@ export default function SearchForm() {
 
   // Executes on page load - responsible for getting local storage items, so recent search buttons can render.
   useEffect(() => {
+    getCurrentLocation();
     setPreviousSearch(JSON.parse(localStorage.getItem("city")) || []);
   }, []);
 
@@ -76,9 +95,10 @@ export default function SearchForm() {
           to="/Weather-Display"
           state={{
             currentSearch: currentSearch,
+            latitude: latitude,
+            longitude: longitude,
           }}
         >
-          {" "}
           <button className="text-center w-full" type="submit">
             {/* Passing currentSearch state as prop to /Weather-Display link */}
             Submit
@@ -104,6 +124,7 @@ export default function SearchForm() {
           ))}
         </div>
       </form>
+      {status === "Complete!" && <GoogleMap latitude={latitude} longitude={longitude} />}
     </>
   );
 }
