@@ -10,11 +10,11 @@ const containerStyle = {
 };
 
 export default function GoogleMaps({ latitude, longitude }) {
-  console.log(latitude, longitude);
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_KEY, // ,
     // ...otherOptions
   });
+  console.log(isLoaded, loadError);
   return (
     <>
       <GoogleMap mapContainerStyle={containerStyle} zoom={8} center={{ lat: latitude, lng: longitude }}>
