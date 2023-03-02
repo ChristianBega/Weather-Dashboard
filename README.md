@@ -36,9 +36,9 @@ npm start
 ## Features 
 
 ### Code example of Open Weather API axios call.
-![Open Weather API Axios Call](/Assets/weatherDashboardFeatureOne.png)
-### Code example of integrating Google Map to render using coordinates from Open Weather API call.
 ![Google Map API integration](/Assets/weatherDashboardFeatureOne.png)
+### Code example of integrating Google Map to render using coordinates from Open Weather API call.
+![Open Weather API Axios Call](/Assets/weatherDashboardFeatureOne.png)
 
 
 ---
