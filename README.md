@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Weather Dashboard 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React single page web application that utilizes Open Weather & Google Maps 3rd Party APIs to consume and display weather data. Offering users a simple and user-friendly way  to quickly and easily search for a city and view its current weather conditions.
 
-## Available Scripts
+--- 
+## Installation
 
-In the project directory, you can run:
+Below is the following installing steps to install and run this app.
 
-### `npm start`
+1. Clone this repo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```sh
+git clone git@github.com:ChristianBega/Weather-Dashboard.git
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. Install NPM packages/dependencies
 
-### `npm test`
+```sh
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Launch application
 
-### `npm run build`
+```sh
+npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Usage 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Weather Dashboard Gif](/Assets/WeatherDashboard.gif)
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Features 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Code example of Open Weather API axios call.
+![Open Weather API Axios Call](/Assets/weatherDashboardFeatureOne.png)
+### Code example of integrating Google Map to render using coordinates from Open Weather API call.
+![Google Map API integration](/Assets/weatherDashboardFeatureOne.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## Credits 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Google Maps API](https://developers.google.com/maps/documentation/javascript)
+- [Open Weather API](https://openweathermap.org/api/one-call-3)
+- [Axios](https://axios-http.com/docs/intro) 
+- [Local Storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+- [Framer Motion](https://www.framer.com/motion/)
+- [Tail Wind Css](https://tailwindcss.com/docs/installation)
+- [Date Fns](https://date-fns.org/docs/Getting-Started)
