@@ -1,8 +1,9 @@
-# Weather Dashboard 
+# Weather Dashboard
 
-A React single page web application that utilizes Open Weather & Google Maps 3rd Party APIs to consume and display weather data. Offering users a simple and user-friendly way  to quickly and easily search for a city and view its current weather conditions.
+A React single page web application that utilizes Open Weather & Google Maps 3rd Party APIs to consume and display weather data. Offering users a simple and user-friendly way to quickly and easily search for a city and view its current weather conditions.
 
---- 
+---
+
 ## Installation
 
 Below is the following installing steps to install and run this app.
@@ -27,27 +28,29 @@ npm start
 
 ---
 
-## Usage 
+## Usage
 
 ![Weather Dashboard Gif](/Assets/WeatherDashboard.gif)
 
 ---
 
-## Features 
+## Features
 
 ### Code example of Open Weather API axios call.
-![Google Map API integration](/Assets/weatherDashboardFeatureOne.png)
-### Code example of integrating Google Map to render using coordinates from Open Weather API call.
-![Open Weather API Axios Call](/Assets/weatherDashboardFeatureOne.png)
 
+![Google Map API integration](/Assets/openWeatherAxiosCall.png)
+
+### Code example of integrating Google Map to render using coordinates from Open Weather API call.
+
+![Open Weather API Axios Call](/Assets/openWeatherGoogleMaps.png)
 
 ---
 
-## Credits 
+## Credits
 
 - [Google Maps API](https://developers.google.com/maps/documentation/javascript)
 - [Open Weather API](https://openweathermap.org/api/one-call-3)
-- [Axios](https://axios-http.com/docs/intro) 
+- [Axios](https://axios-http.com/docs/intro)
 - [Local Storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 - [Framer Motion](https://www.framer.com/motion/)
 - [Tail Wind Css](https://tailwindcss.com/docs/installation)

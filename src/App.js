@@ -5,7 +5,6 @@ import Dashboard from "./Components/dashboard.jsx";
 import Navigation from "./Components/navigation";
 import WeatherDisplay from "./Components/weatherDisplay";
 import { SkeletonTheme } from "react-loading-skeleton";
-
 function App() {
   const location = useLocation();
   return (
@@ -20,11 +19,6 @@ function App() {
     </SkeletonTheme>
   );
 }
-// if ("serviceWorker" in navigator) {
-//   // Use the window load event to keep the page load performant
-//   window.addEventListener("load", () => {
-//     navigator.serviceWorker.register("/service-worker.js");
-//   });
-// }
+
 
 export default App;

@@ -11,7 +11,7 @@ const containerStyle = {
 
 export default function GoogleMaps({ latitude, longitude }) {
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: process.env.REACT_APP_KEY, // ,
+    googleMapsApiKey: process.env.REACT_APP_KEY_Google_Map_API, // ,
     // ...otherOptions
   });
 
